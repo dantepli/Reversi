@@ -30,7 +30,15 @@ string Cell::toCoordinate() const {
 bool Cell::operator==(const Cell &other) {
   return row == other.row && col == other.col;
 }
-ostream &operator <<(ostream &out, const Cell &cell) {
+ostream &operator<<(ostream &out, const Cell &cell) {
   out << cell.disk;
   return out;
+}
+Cell &Cell::operator=(const Cell &other) {
+  if (this != &other) {
+    row = other.row;
+    col = other.col;
+    disk = other.disk;
+  }
+  return *this;
 }

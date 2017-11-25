@@ -9,7 +9,7 @@ Board::Board(int size) : size(size) {
   for (int i = 0; i < size; i++) {
     this->board[i] = new Cell[size];
     for (int j = 0; j < size; j++) {
-      this->board[i][j] = Cell(i,j);
+      this->board[i][j] = Cell(i, j);
     }
   }
   // player disks init
@@ -20,8 +20,27 @@ Board::Board(int size) : size(size) {
   this->board[mid][roofMid].setDisk(Globals::kBlacks);
   this->board[roofMid][mid].setDisk(Globals::kBlacks);
 }
-Board::~Board() {
+Board::Board(const Board &oldBoard) {
+  if (this == &oldBoard) {
+    // self copy check.
+    return;
+  }
+  size = oldBoard.size;
+  this->board = new Cell *[size];
+  for (int i = 0; i < size; i++) {
+    this->board[i] = new Cell[size];
+    for (int j = 0; j < size; j++) {
+      this->board[i][j] = Cell(i, j);
+    }
+  }
   for(int i = 0 ; i < size ; i++) {
+    for(int j = 0 ; j < size ; j++) {
+      board[i][j] = oldBoard.board[i][j];
+    }
+  }
+}
+Board::~Board() {
+  for (int i = 0; i < size; i++) {
     // deleting allocated rows.
     delete[] this->board[i];
   }
@@ -29,8 +48,8 @@ Board::~Board() {
   delete[] this->board;
 }
 void Board::clearBoard() {
-  for(int i = 0 ; i < size ; i++) {
-    for(int j = 0 ; j < size ; j++) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
       this->board[i][j].setDisk(Globals::kEmpty);
     }
   }
@@ -38,8 +57,8 @@ void Board::clearBoard() {
 int Board::getSize() const {
   return size;
 }
-Cell* Board::getCell(int row, int col) {
-  if(row > size || col > size) {
+Cell *Board::getCell(int row, int col) {
+  if (row > size || col > size) {
     return NULL;
   }
   return &board[row][col];

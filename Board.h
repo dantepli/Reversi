@@ -19,6 +19,11 @@ class Board {
    */
   Board(int size = Globals::kSize);
   /**
+   * Deep copy C'tor.
+   * @param oldBoard - a board to be copied from.
+   */
+  Board(const Board &oldBoard);
+  /**
    * Clears the board to empty cells.
    */
   void clearBoard();

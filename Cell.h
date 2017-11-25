@@ -45,6 +45,12 @@ class Cell {
   void setDisk(char disk);
   /**
    *
+   * @param other - a cell.
+   * @return - itself, with values from other assigned.
+   */
+  Cell& operator =(const Cell &other);
+  /**
+   *
    * @param other - a cell to compare with.
    * @return - true if equal (by coordinates).
    */
