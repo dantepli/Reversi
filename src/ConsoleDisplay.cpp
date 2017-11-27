@@ -4,6 +4,7 @@
 
 #include "ConsoleDisplay.h"
 void ConsoleDisplay::display(Board &board) const {
+  cout << endl;
   string row;
   int size = board.getSize();
   row.append((size * 4) + 2, ROW_SEP);

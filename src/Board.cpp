@@ -33,8 +33,8 @@ Board::Board(const Board &oldBoard) {
       this->board[i][j] = Cell(i, j);
     }
   }
-  for(int i = 0 ; i < size ; i++) {
-    for(int j = 0 ; j < size ; j++) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
       board[i][j] = oldBoard.board[i][j];
     }
   }
@@ -62,5 +62,18 @@ Cell *Board::getCell(int row, int col) {
     return NULL;
   }
   return &board[row][col];
+}
+Board &Board::operator=(const Board &other) {
+  if (this != &other) {
+    if (size != other.size) {
+      return *this;
+    }
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        board[i][j] = other.board[i][j];
+      }
+    }
+  }
+  return *this;
 }
 

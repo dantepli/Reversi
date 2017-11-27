@@ -24,6 +24,12 @@ class Board {
    */
   Board(const Board &oldBoard);
   /**
+ * the boards need to be the same size, otherwise, no assignment will be done.
+ * @param other - a board.
+ * @return - itself, with values from other assigned.
+ */
+  Board &operator=(const Board &other);
+  /**
    * Clears the board to empty cells.
    */
   void clearBoard();
@@ -38,7 +44,7 @@ class Board {
    * @param col - column index.
    * @return - a cell in the corresponding location, NULL if out of bounds.
    */
-  Cell* getCell(int row, int col);
+  Cell *getCell(int row, int col);
   /**
    * Destructor.
    */

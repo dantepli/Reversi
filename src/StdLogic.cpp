@@ -3,7 +3,7 @@
 //
 
 #include "StdLogic.h"
-StdLogic::StdLogic(Board *board) : board(board), kNumOfDirs(8) {
+StdLogic::StdLogic() : kNumOfDirs(8) {
   // int dx[8] = {1,1,0,-1,-1,-1,0,1};
   // int dy[8] = {0,1,1,1,0,-1,-1,-1};
   // initialized below.
@@ -20,16 +20,16 @@ StdLogic::~StdLogic() {
   delete[] dx;
   delete[] dy;
 }
-vector<Cell *> StdLogic::getPossibleMoves(const Player &player) {
+vector<Cell *> StdLogic::getPossibleMoves(const Player &player, Board &board) {
   vector<Cell *> moves;
-  int size = board->getSize();
+  int size = board.getSize();
   char opponentDisk = opponentCell(player.getColor());
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      Cell *current = board->getCell(i, j);
+      Cell *current = board.getCell(i, j);
       if (current->getDisk() == Globals::kEmpty) {
         // a possible cell to place a disk.
-        if (isPossibleMove(opponentDisk, *current)) {
+        if (isPossibleMove(opponentDisk, *current, board)) {
           moves.push_back(current);
         }
       }
@@ -37,7 +37,7 @@ vector<Cell *> StdLogic::getPossibleMoves(const Player &player) {
   }
   return moves;
 }
-void StdLogic::flip(const Player &player, const Cell &cell) {
+void StdLogic::flip(const Player &player, const Cell &cell, Board &board) {
   char opponentDisk = opponentCell(player.getColor());
   vector<Cell *> flips, temp;
   int row = 0, col = 0;
@@ -47,11 +47,11 @@ void StdLogic::flip(const Player &player, const Cell &cell) {
     col = cell.getCol();
     row += dx[i];
     col += dy[i];
-    if (outOfBounds(row, col)) {
+    if (outOfBounds(row, col, board)) {
       // illegal direction.
       continue;
     }
-    Cell *currentCheck = board->getCell(row, col);
+    Cell *currentCheck = board.getCell(row, col);
     char disk = currentCheck->getDisk();
     if (disk == opponentDisk) {
       // we are not out of bounds, and there is an
@@ -61,19 +61,19 @@ void StdLogic::flip(const Player &player, const Cell &cell) {
         temp.push_back(currentCheck);
         row += dx[i];
         col += dy[i];
-        if (outOfBounds(row, col)) {
+        if (outOfBounds(row, col, board)) {
           // not between disks.
           break;
         }
-        currentCheck = board->getCell(row, col);
+        currentCheck = board.getCell(row, col);
         disk = currentCheck->getDisk();
       }
-      if (outOfBounds(row, col)) {
+      if (outOfBounds(row, col, board)) {
         // didn't reach a valid place.
         temp.clear();
         continue;
       }
-      if (board->getCell(row, col)->getDisk() == opponentCell(opponentDisk)) {
+      if (board.getCell(row, col)->getDisk() == opponentCell(opponentDisk)) {
         // reached the original player cell from the opponent, means it's a valid move.
         for (int j = 0; j < temp.size(); j++) {
           flips.push_back(temp[j]);
@@ -87,8 +87,7 @@ void StdLogic::flip(const Player &player, const Cell &cell) {
     flips[i]->setDisk(player.getColor());
   }
 }
-bool StdLogic::isPossibleMove(char opponentDisk, const Cell &cell) {
-  //TODO: Shorten
+bool StdLogic::isPossibleMove(char opponentDisk, const Cell &cell, Board &board) {
   int row = 0, col = 0;
   for (int i = 0; i < kNumOfDirs; i++) {
     // iterate through the possible directions in the 2D plain.
@@ -96,19 +95,19 @@ bool StdLogic::isPossibleMove(char opponentDisk, const Cell &cell) {
     col = cell.getCol();
     row += dx[i];
     col += dy[i];
-    if (outOfBounds(row, col)) {
+    if (outOfBounds(row, col, board)) {
       // illegal direction.
       continue;
     }
-    Cell *currentCheck = board->getCell(row, col);
+    Cell *currentCheck = board.getCell(row, col);
     char disk = currentCheck->getDisk();
     if (disk == opponentDisk) {
       // we are not out of bounds, and there is an
       // opponent disk on the cell, continue checking.
-      if (!iterateOpponentDisks(dx[i], dy[i], &row, &col, opponentDisk)) {
+      if (!iterateOpponentDisks(dx[i], dy[i], &row, &col, opponentDisk, board)) {
         continue;
       }
-      if (board->getCell(row, col)->getDisk() == opponentCell(opponentDisk)) {
+      if (board.getCell(row, col)->getDisk() == opponentCell(opponentDisk)) {
         // reached the original player cell from the opponent, means it's a valid move.
         return true;
       }
@@ -123,21 +122,21 @@ char StdLogic::opponentCell(char playerCell) {
     return Globals::kWhites;
   }
 }
-bool StdLogic::outOfBounds(int row, int col) {
-  return row < 0 || row > (board->getSize() - 1) || col < 0 || col > (board->getSize() - 1);
+bool StdLogic::outOfBounds(int row, int col, Board &board) {
+  return row < 0 || row > (board.getSize() - 1) || col < 0 || col > (board.getSize() - 1);
 }
-bool StdLogic::iterateOpponentDisks(int dx, int dy, int *row, int *col, char opponentDisk) {
-  Cell *currentCheck = board->getCell(*row, *col);
+bool StdLogic::iterateOpponentDisks(int dx, int dy, int *row, int *col, char opponentDisk, Board &board) {
+  Cell *currentCheck = board.getCell(*row, *col);
   char disk = currentCheck->getDisk();
   while (disk == opponentDisk) {
     // iterate through the opponents disks.
     *row += dx;
     *col += dy;
-    if (outOfBounds(*row, *col)) {
+    if (outOfBounds(*row, *col, board)) {
       // not between disks.
       return false;
     }
-    currentCheck = board->getCell(*row, *col);
+    currentCheck = board.getCell(*row, *col);
     disk = currentCheck->getDisk();
   }
   return true;

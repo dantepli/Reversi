@@ -13,9 +13,10 @@
 class Game {
  public:
   /**
-   * C'tor.
+   * Default C'tor. Creates the game with 2 Human players and a board size 8.
    */
   Game ();
+  Game(Board *board, Logic *logic, Player *white, Player *black);
   /**
    * D'tor.
    */
@@ -25,7 +26,7 @@ class Game {
    */
   void play ();
  private:
-  Board board;
+  Board *board;
   Logic *logic;
   Player *white;
   Player *black;
