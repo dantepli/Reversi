@@ -12,7 +12,7 @@ set(SOURCE_FILES
         src/Board.h
         src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h)
 set(TEST_FILES
-        tests/main_test.cpp tests/Board_test.cpp src/Board.cpp src/Board.h src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h)
+        tests/main_test.cpp tests/Board_test.cpp src/Board.cpp src/Board.h src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h tests/Cell_test.cpp tests/Game_test.cpp tests/HumanPlayer_test.cpp tests/StdLogic_test.cpp tests/Board_test.h)
 add_executable(Reversi ${SOURCE_FILES} main.cpp)
 add_executable(ReversiTest ${TEST_FILES} ${SOURCE_FILES})
 target_link_libraries(ReversiTest gtest gtest_main)

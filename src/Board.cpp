@@ -58,7 +58,7 @@ int Board::getSize() const {
   return size;
 }
 Cell *Board::getCell(int row, int col) {
-  if (row > size || col > size) {
+  if (row > size || col > size || row < 0 || col < 0) {
     return NULL;
   }
   return &board[row][col];
