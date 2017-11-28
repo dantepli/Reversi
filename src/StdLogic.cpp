@@ -87,7 +87,9 @@ void StdLogic::flip(const Player &player, const Cell &cell, Board &board) {
     flips[i]->setDisk(player.getColor());
   }
 }
-bool StdLogic::isPossibleMove(char opponentDisk, const Cell &cell, Board &board) {
+bool StdLogic::isPossibleMove(char opponentDisk,
+                              const Cell &cell,
+                              Board &board) {
   int row = 0, col = 0;
   for (int i = 0; i < kNumOfDirs; i++) {
     // iterate through the possible directions in the 2D plain.
@@ -104,7 +106,12 @@ bool StdLogic::isPossibleMove(char opponentDisk, const Cell &cell, Board &board)
     if (disk == opponentDisk) {
       // we are not out of bounds, and there is an
       // opponent disk on the cell, continue checking.
-      if (!iterateOpponentDisks(dx[i], dy[i], &row, &col, opponentDisk, board)) {
+      if (!iterateOpponentDisks(dx[i],
+                                dy[i],
+                                &row,
+                                &col,
+                                opponentDisk,
+                                board)) {
         continue;
       }
       if (board.getCell(row, col)->getDisk() == opponentCell(opponentDisk)) {
@@ -123,9 +130,15 @@ char StdLogic::opponentCell(char playerCell) {
   }
 }
 bool StdLogic::outOfBounds(int row, int col, Board &board) {
-  return row < 0 || row > (board.getSize() - 1) || col < 0 || col > (board.getSize() - 1);
+  return row < 0 || row > (board.getSize() - 1) || col < 0
+      || col > (board.getSize() - 1);
 }
-bool StdLogic::iterateOpponentDisks(int dx, int dy, int *row, int *col, char opponentDisk, Board &board) {
+bool StdLogic::iterateOpponentDisks(int dx,
+                                    int dy,
+                                    int *row,
+                                    int *col,
+                                    char opponentDisk,
+                                    Board &board) {
   Cell *currentCheck = board.getCell(*row, *col);
   char disk = currentCheck->getDisk();
   while (disk == opponentDisk) {

@@ -8,15 +8,17 @@
 #include "Player.h"
 #include "Logic.h"
 #include "Board.h"
+#include "Display.h"
 class CompPlayer : public Player {
  public:
   /**
    * C'tor.
+   * @param - a display.
    * @param board - a game board.
    * @param logic - logic for the game.
    * @param color - player color.
    */
-  CompPlayer(Board *board, Logic *logic, char color);
+  CompPlayer(Display *display, Board *board, Logic *logic, char color);
   /**
    *
    * @param moves - a vector of possible moves.
@@ -25,6 +27,7 @@ class CompPlayer : public Player {
   virtual Cell pickMove(vector<Cell *> &moves) const;
   virtual char getColor() const;
  private:
+  Display *display;
   Board *board;
   Logic *logic;
   char color;

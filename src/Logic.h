@@ -16,7 +16,8 @@ class Logic {
    * @param board - a board.
    * @return - a vector of the possible moves.
    */
-  virtual vector<Cell*> getPossibleMoves(const Player &player, Board &board)  = 0;
+  virtual vector<Cell *> getPossibleMoves(const Player &player,
+                                          Board &board)  = 0;
   /**
    *
    * @param player - a player to flip the pieces for.
@@ -29,7 +30,9 @@ class Logic {
    */
   virtual ~Logic() {};
  private:
-  virtual bool isPossibleMove(char opponentDisk, const Cell &cell, Board &board) = 0;
+  virtual bool isPossibleMove(char opponentDisk,
+                              const Cell &cell,
+                              Board &board) = 0;
 };
 
 #endif //LOGIC_H

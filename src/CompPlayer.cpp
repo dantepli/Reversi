@@ -3,7 +3,8 @@
 
 #include "CompPlayer.h"
 #include "HumanPlayer.h"
-CompPlayer::CompPlayer(Board *board, Logic *logic, char color) : board(board), logic(logic), color(color) {}
+CompPlayer::CompPlayer(Display *display, Board *board, Logic *logic, char color)
+    : display(display), board(board), logic(logic), color(color) {}
 Cell CompPlayer::pickMove(vector<Cell *> &moves) const {
   int minScore = INT_MAX;
   Cell picked;
@@ -16,8 +17,7 @@ Cell CompPlayer::pickMove(vector<Cell *> &moves) const {
       picked = *moves[i];
     }
   }
-  cout << endl;
-  cout << picked.toCoordinate() << endl;
+  display->displayAIChoice(*this, picked);
   return picked;
 }
 char CompPlayer::getColor() const {
@@ -27,7 +27,7 @@ int CompPlayer::simMove(Cell &cell) const {
   int maxScore = INT_MIN;
   int row = cell.getRow();
   int col = cell.getCol();
-  HumanPlayer opponent(opponentColor()); // TODO
+  HumanPlayer opponent(display, opponentColor()); // TODO
   Board sim(*board); // copy c'tor.
   logic->flip(*this, *sim.getCell(row, col), sim); // flip on the copied board.
   vector<Cell *> opponentMoves = logic->getPossibleMoves(opponent, sim);
@@ -43,7 +43,9 @@ int CompPlayer::simMove(Cell &cell) const {
 }
 int CompPlayer::simOpponent(Board &b, Cell &move, Player &opponent) const {
   Board simOpponent(b);
-  logic->flip(opponent, *simOpponent.getCell(move.getRow(), move.getCol()), simOpponent);
+  logic->flip(opponent,
+              *simOpponent.getCell(move.getRow(), move.getCol()),
+              simOpponent);
   return detScore(simOpponent);
 }
 char CompPlayer::opponentColor() const {

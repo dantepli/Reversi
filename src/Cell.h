@@ -48,20 +48,20 @@ class Cell {
    * @param other - a cell.
    * @return - itself, with values from other assigned.
    */
-  Cell& operator =(const Cell &other);
+  Cell &operator=(const Cell &other);
   /**
    *
    * @param other - a cell to compare with.
    * @return - true if equal (by coordinates).
    */
-  bool operator ==(const Cell &other);
+  bool operator==(const Cell &other);
   /**
    *
    * @param out - an output stream operator.
    * @param cell - a cell reference.
    * @return - an output stream representation of the cell (disk value).
    */
-  friend ostream &operator <<(ostream &out, const Cell &cell);
+  friend ostream &operator<<(ostream &out, const Cell &cell);
   /**
    *
    * @return - a string representation of the location of the cell in the grid.

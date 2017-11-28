@@ -2,10 +2,12 @@
 // Dan Teplitski 312895147
 //
 #include "HumanPlayer.h"
-HumanPlayer::HumanPlayer (char color) : color(color) {}
-HumanPlayer::~HumanPlayer () {}
-Cell HumanPlayer::pickMove (vector<Cell *> &moves) const {
-  printMessage(moves);
+HumanPlayer::HumanPlayer(Display *display, char color)
+    : display(display), color(color) {}
+HumanPlayer::~HumanPlayer() {}
+Cell HumanPlayer::pickMove(vector<Cell *> &moves) const {
+//  printMessage(moves);
+  display->displayHumanPlayerChoiceMessage(*this, moves);
   int row = 0, col = 0;
   cin >> row >> col;
   if (cin.fail()) {
@@ -26,19 +28,10 @@ Cell HumanPlayer::pickMove (vector<Cell *> &moves) const {
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
   return picked;
 }
-char HumanPlayer::getColor () const {
+char HumanPlayer::getColor() const {
   return color;
 }
-void HumanPlayer::printMessage (vector<Cell *> &moves) const {
-  cout << color << ": " << "Your Turn." << endl;
-  cout << "Your possible moves are: ";
-  for (int i = 0; i < moves.size(); i++) {
-    cout << moves[i]->toCoordinate() + " ";
-  }
-  cout << endl << "Please enter your move. "
-       << "Expected input for (x,y) is x y" << endl;
-}
-bool HumanPlayer::cellValidity (Cell &cell, vector<Cell *> &moves) const {
+bool HumanPlayer::cellValidity(Cell &cell, vector<Cell *> &moves) const {
   for (int i = 0; i < moves.size(); i++) {
     if (cell == *moves[i]) {
       return true;

@@ -15,35 +15,39 @@ class Game {
   /**
    * Default C'tor. Creates the game with 2 Human players and a board size 8.
    */
-  Game ();
-  Game(Board *board, Logic *logic, Player *white, Player *black);
+  Game();
+  Game(Display *display,
+       Board *board,
+       Logic *logic,
+       Player *white,
+       Player *black);
   /**
-   * D'tor.
+   * D'tor. Deletes all the members given.
    */
-  virtual ~Game ();
+  virtual ~Game();
   /**
    * plays the game.
    */
-  void play ();
+  void play();
  private:
+  Display *display;
   Board *board;
   Logic *logic;
   Player *white;
   Player *black;
-  Display *display;
   bool whiteMoves;
   bool blackMoves;
   /**
    * plays a turn.
    * @param player - a player.
    */
-  void playTurn (const Player &player);
+  void playTurn(const Player &player);
   /**
    * prints the high score.
    * @param player1 - a player.
    * @param player2 - a player.
    */
-  void determineHighScore (const Player &player1, const Player &player2);
+  void determineHighScore(const Player &player1, const Player &player2);
   /**
    * updates the available moves.
    * @param player - a player.

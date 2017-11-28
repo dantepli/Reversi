@@ -1,14 +1,23 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef CONSOLEDISPLAY_H
 #define CONSOLEDISPLAY_H
 
 #include "Display.h"
-class ConsoleDisplay: public Display {
+class ConsoleDisplay : public Display {
  public:
-  virtual void display(Board &board) const;
+  /**
+   * prints the board to the console.
+   * @param board - a board.
+   */
+  virtual void displayBoard(Board &board) const;
+  virtual void displayHumanPlayerChoiceMessage(const Player &player,
+                                               const vector<Cell *> &moves) const;
+  virtual void displayNoMoves(const Player &player) const;
+  virtual void displayEndScreen(const Player &player1,
+                                const Player &player2,
+                                const Board &board,
+                                int player1Score,
+                                int player2Score) const;
+  virtual void displayAIChoice(const Player &player, const Cell &cell) const;
 };
 
 #endif //CONSOLEDISPLAY_H

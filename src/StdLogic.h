@@ -7,7 +7,7 @@
 #include "Logic.h"
 #include "Player.h"
 // Standard logic rule set for the Reversi game.
-class StdLogic: public Logic {
+class StdLogic : public Logic {
  public:
   /**
    * C'tor.
@@ -22,7 +22,7 @@ class StdLogic: public Logic {
    * @param board - a board.
    * @return - a vector of possible moves.
    */
-  virtual vector<Cell*> getPossibleMoves(const Player &player, Board &board);
+  virtual vector<Cell *> getPossibleMoves(const Player &player, Board &board);
   /**
    * flips the cells between the placed cell to the player's cell. assuming validity of cell.
    * @param player - a player to flip for.
@@ -62,14 +62,19 @@ class StdLogic: public Logic {
    * @return - true if we iterated through the opponents disks without reaching
    * the end of the board.
    */
-  bool iterateOpponentDisks(int dx, int dy, int *row, int *col, char opponentDisk, Board &board);
+  bool iterateOpponentDisks(int dx,
+                            int dy,
+                            int *row,
+                            int *col,
+                            char opponentDisk,
+                            Board &board);
   /**
    *
    * @param playerCell - a current player cell disk.
    * @board board - a board.
    * @return - the opponent's player cell disk.
    */
-  char opponentCell (char playerCell);
+  char opponentCell(char playerCell);
 };
 
 #endif //STDLOGIC_H
