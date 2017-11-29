@@ -33,7 +33,7 @@ TEST_F(Board_test, DeepCopyTest) {
   // checks that every cell in the board has different address in the memory compare to the copy.
   for (int i = 0; i < board.getSize(); i++) {
     for (int j = 0; j < board.getSize(); j++) {
-      EXPECT_NE(board.getCell(i, j), copyBoard.getCell(i,j));
+      EXPECT_NE(board.getCell(i, j), copyBoard.getCell(i, j));
     }
   }
 }

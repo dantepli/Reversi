@@ -8,14 +8,14 @@
 #include "../include/CompPlayer.h"
 #include "../include/StdLogic.h"
 class CompPlayer_test : public testing::Test {
-  virtual void  SetUp() {
+  virtual void SetUp() {
     board = &bo;
     display = new ConsoleDisplay();
     logic = new StdLogic();
-    CompWhitePlayer = new CompPlayer(display, board , logic, Globals::kWhites);
+    CompWhitePlayer = new CompPlayer(display, board, logic, Globals::kWhites);
   }
 
-  virtual void TearDown(){
+  virtual void TearDown() {
     delete display;
     delete CompWhitePlayer;
     delete logic;
@@ -24,10 +24,10 @@ class CompPlayer_test : public testing::Test {
  protected:
   Cell chosenCell;
   vector<Cell *> moves;
-  Player* CompWhitePlayer;
-  Logic* logic;
-  Display* display;
-  Board* board;
+  Player *CompWhitePlayer;
+  Logic *logic;
+  Display *display;
+  Board *board;
   Board bo;
 };
 

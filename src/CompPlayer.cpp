@@ -24,7 +24,7 @@ int CompPlayer::simMove(Cell &cell) const {
   int maxScore = INT_MIN;
   int row = cell.getRow();
   int col = cell.getCol();
-  HumanPlayer opponent(display, opponentColor()); // TODO
+  HumanPlayer opponent(display, opponentColor());
   Board sim(*board); // copy c'tor.
   logic->flip(*this, *sim.getCell(row, col), sim); // flip on the copied board.
   vector<Cell *> opponentMoves = logic->getPossibleMoves(opponent, sim);

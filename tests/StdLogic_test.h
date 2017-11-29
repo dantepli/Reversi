@@ -12,7 +12,7 @@ class StdLogic_test : public testing::Test {
   virtual void SetUp() {
     board = &bo;
     display = new ConsoleDisplay();
-    blackPlayer = new HumanPlayer(display,Globals::kBlacks);
+    blackPlayer = new HumanPlayer(display, Globals::kBlacks);
     whitePlayer = new HumanPlayer(display, Globals::kWhites);
     logic = new StdLogic();
   }
@@ -25,13 +25,13 @@ class StdLogic_test : public testing::Test {
   }
 
  protected:
-  Cell* cell;
-  Board* board;
+  Cell *cell;
+  Board *board;
   Board bo;
-  Player* blackPlayer;
-  Player* whitePlayer;
-  Logic* logic;
-  Display* display;
+  Player *blackPlayer;
+  Player *whitePlayer;
+  Logic *logic;
+  Display *display;
   vector<Cell *> moves;
 };
 #endif //REVERSI_STDLOGIC_TEST_H

@@ -7,9 +7,9 @@ TEST(CellTest, HandLegalNums) {
   EXPECT_EQ(0, defaultCell.getRow());
   EXPECT_EQ(0, defaultCell.getCol());
   EXPECT_EQ(' ', defaultCell.getDisk());
-  int row = 1, col =1;
+  int row = 1, col = 1;
   char disk = Globals::kBlacks;
-  Cell cell(row,col,disk);
+  Cell cell(row, col, disk);
   EXPECT_EQ(1, cell.getRow());
   EXPECT_EQ(1, cell.getCol());
   EXPECT_EQ('X', cell.getDisk());
