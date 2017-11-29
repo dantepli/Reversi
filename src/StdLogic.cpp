@@ -1,4 +1,4 @@
-#include "StdLogic.h"
+#include "../include/StdLogic.h"
 StdLogic::StdLogic() : kNumOfDirs(8) {
   // int dx[8] = {1,1,0,-1,-1,-1,0,1};
   // int dy[8] = {0,1,1,1,0,-1,-1,-1};

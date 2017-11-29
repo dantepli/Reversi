@@ -1,13 +1,9 @@
-//
-// Created by or on 27/11/17.
-//
-
-
 #include <gtest/gtest.h>
-#include "../src/Cell.h"
+#include "../include/Cell.h"
 
 TEST(CellTest, HandLegalNums) {
   Cell defaultCell;
+  // checks if no arguments were entered to the cell.
   EXPECT_EQ(0, defaultCell.getRow());
   EXPECT_EQ(0, defaultCell.getCol());
   EXPECT_EQ(' ', defaultCell.getDisk());
@@ -18,5 +14,6 @@ TEST(CellTest, HandLegalNums) {
   EXPECT_EQ(1, cell.getCol());
   EXPECT_EQ('X', cell.getDisk());
   cell.setDisk(Globals::kWhites);
+  // checks setDisk method.
   EXPECT_EQ('O', cell.getDisk());
 }

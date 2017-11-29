@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../include/Game.h"
 Game::Game() : blackMoves(true), whiteMoves(true) {
   board = new Board(Globals::kSize);
   logic = new StdLogic();

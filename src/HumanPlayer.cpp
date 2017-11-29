@@ -1,4 +1,4 @@
-#include "HumanPlayer.h"
+#include "../include/HumanPlayer.h"
 HumanPlayer::HumanPlayer(Display *display, char color)
     : display(display), color(color) {}
 HumanPlayer::~HumanPlayer() {}

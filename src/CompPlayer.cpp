@@ -1,5 +1,5 @@
-#include "CompPlayer.h"
-#include "HumanPlayer.h"
+#include "../include/CompPlayer.h"
+#include "../include/HumanPlayer.h"
 CompPlayer::CompPlayer(Display *display, Board *board, Logic *logic, char color)
     : display(display), board(board), logic(logic), color(color) {}
 Cell CompPlayer::pickMove(vector<Cell *> &moves) const {

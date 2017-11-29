@@ -1,6 +1,3 @@
-//
-// Created by or on 26/11/17.
-//
 #include "Board_test.h"
 
 TEST_F(Board_test, StartingPosition) {

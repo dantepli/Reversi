@@ -1,4 +1,4 @@
-#include "ConsoleDisplay.h"
+#include "../include/ConsoleDisplay.h"
 void ConsoleDisplay::displayBoard(Board &board) const {
   cout << endl;
   string row;

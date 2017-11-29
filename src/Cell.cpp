@@ -1,4 +1,4 @@
-#include "Cell.h"
+#include "../include/Cell.h"
 Cell::Cell(int row, int col, char disk) : row(row), col(col), disk(disk) {}
 Cell::Cell(const Cell &oldCell) {
   row = oldCell.row;

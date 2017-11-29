@@ -1,6 +1,6 @@
-#include "src/Game.h"
-#include "src/CompPlayer.h"
-#include "src/ConsoleMenu.h"
+#include "include/Game.h"
+#include "include/CompPlayer.h"
+#include "include/ConsoleMenu.h"
 int main() {
   Menu *menu = new ConsoleMenu();
   int input = menu->showMainMenu();

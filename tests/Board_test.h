@@ -1,15 +1,20 @@
-//
-// Created by or on 28/11/17.
-//
-
-#ifndef REVERSI_BOARD_TEST_H
-#define REVERSI_BOARD_TEST_H
+#ifndef REVERSI_BOARD_TEST_H_H
+#define REVERSI_BOARD_TEST_H_H
 
 #include <gtest/gtest.h>
-#include "../src/Board.h"
+#include "../include/Board.h"
 
-struct Board_test : testing::Test {
+class Board_test : public testing::Test {
+
+  virtual void SetUp() {
+    board;
+  }
+
+  virtual void TearDown() {
+
+  }
+
+ protected:
   Board board;
 };
-
-#endif //REVERSI_BOARD_TEST_H
+#endif //REVERSI_BOARD_TEST_H_H
