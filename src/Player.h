@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <vector>

@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef BOARD_H
 #define BOARD_H
 #include <iostream>
@@ -11,6 +7,7 @@
 #define COL_SEP '|'
 #define ROW_SEP '-'
 using namespace std;
+
 class Board {
  public:
   /**

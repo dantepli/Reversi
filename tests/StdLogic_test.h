@@ -23,8 +23,7 @@ struct StdLogic_test : testing::Test {
   Display* display;
   vector<Cell *> moves;
   StdLogic_test() {
-      board = &bo;
-
+    board = &bo;
     display = new ConsoleDisplay();
     CompWhitePlayer = new CompPlayer(display, board , logic, Globals::kWhites);
     blackPlayer = new HumanPlayer(display,Globals::kBlacks);

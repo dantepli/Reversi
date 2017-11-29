@@ -1,6 +1,3 @@
-// Dan Teplitski 312895147
-// Or Lion 204025175
-
 #ifndef REVERSI_COMPPLAYER_H
 #define REVERSI_COMPPLAYER_H
 

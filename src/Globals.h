@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef GLOBALS_H
 #define GLOBALS_H
 

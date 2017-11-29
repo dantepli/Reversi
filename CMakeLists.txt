@@ -12,7 +12,7 @@ set(SOURCE_FILES
         src/Board.h
         src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h src/Menu.h src/ConsoleMenu.cpp src/ConsoleMenu.h)
 set(TEST_FILES
-        tests/main_test.cpp tests/Board_test.cpp src/Board.cpp src/Board.h src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h tests/Cell_test.cpp tests/StdLogic_test.cpp tests/Board_test.h src/Menu.h src/ConsoleMenu.cpp src/ConsoleMenu.h tests/StdLogic_test.h)
+        tests/main_test.cpp tests/Board_test.cpp src/Board.cpp src/Board.h src/Cell.cpp src/Cell.h src/Globals.h src/Player.h src/HumanPlayer.cpp src/HumanPlayer.h src/Logic.h src/StdLogic.cpp src/StdLogic.h src/Game.cpp src/Game.h src/Display.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/CompPlayer.cpp src/CompPlayer.h tests/Cell_test.cpp tests/StdLogic_test.cpp tests/Board_test.h src/Menu.h src/ConsoleMenu.cpp src/ConsoleMenu.h tests/StdLogic_test.h tests/CompPlayer_test.cpp tests/CompPlayer_test.h)
 
 add_executable(Reversi ${SOURCE_FILES} main.cpp)
 add_executable(ReversiTest ${TEST_FILES} ${SOURCE_FILES})

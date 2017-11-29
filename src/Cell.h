@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef CELL_H
 #define CELL_H
 using namespace std;

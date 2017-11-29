@@ -1,6 +1,3 @@
-//
-// Dan Teplitski 3128952147
-//
 #include "Board.h"
 
 Board::Board(int size) : size(size) {

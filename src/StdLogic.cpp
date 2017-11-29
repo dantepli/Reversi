@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #include "StdLogic.h"
 StdLogic::StdLogic() : kNumOfDirs(8) {
   // int dx[8] = {1,1,0,-1,-1,-1,0,1};

@@ -1,6 +1,3 @@
-// Dan Teplitski 312895147
-// Or Lion 204025175
-
 #include "CompPlayer.h"
 #include "HumanPlayer.h"
 CompPlayer::CompPlayer(Display *display, Board *board, Logic *logic, char color)

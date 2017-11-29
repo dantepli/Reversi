@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef GAME_H
 #define GAME_H
 #include "Board.h"

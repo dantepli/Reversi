@@ -1,6 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
 #include "HumanPlayer.h"
 HumanPlayer::HumanPlayer(Display *display, char color)
     : display(display), color(color) {}

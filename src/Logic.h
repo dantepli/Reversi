@@ -1,7 +1,3 @@
-//
-// Dan Teplitski 312895147
-//
-
 #ifndef LOGIC_H
 #define LOGIC_H
 
