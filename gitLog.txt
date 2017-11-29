@@ -1,0 +1,109 @@
+commit 0d571c6199f9bd614155c09b15b20a5a1f59cdca
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Wed Nov 29 20:38:02 2017 +0200
+
+    Some coding style modifcations, updated info
+
+commit b6d58c36b06595f0ffa9aaf27069814cd0e5c18d
+Author: orlion312 <orlion312@gmail.com>
+Date:   Wed Nov 29 14:00:35 2017 +0200
+
+    finish all tests
+
+commit cdc53f5f256decdd5519ab79f46ba36c5a0f9de8
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Wed Nov 29 11:50:06 2017 +0200
+
+    added AI test teplate
+
+commit 0cc1ffe7a81e93f0636211d8d2b53e6eaa79d238
+Author: orlion312 <orlion312@gmail.com>
+Date:   Wed Nov 29 00:32:00 2017 +0200
+
+    finished board test and updated logic test
+
+commit 800502ddde3e486bfa09949d48c018d17abe165b
+Author: orlion312 <orlion312@gmail.com>
+Date:   Tue Nov 28 18:18:07 2017 +0200
+
+    updated tests
+
+commit d3a9e5d9231c42fa0e10c699e27cc663f7637fe8
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Nov 28 18:05:39 2017 +0200
+
+    added Menu, gave Display more responsibility, added Display to the players.
+
+commit 19fae4ca856477d86167e88835f36107714fc097
+Author: orlion312 <orlion312@gmail.com>
+Date:   Tue Nov 28 12:36:06 2017 +0200
+
+    added tests
+
+commit 2da5d3cf921a5bef0498a8c15f36e543dfac6045
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Nov 27 15:54:04 2017 +0200
+
+    added AI Player, modified logic for board reference
+
+commit ab8d86cdd786a2159d41aaf2547a067e8c75af6a
+Author: orlion312 <orlion312@gmail.com>
+Date:   Sun Nov 26 17:29:10 2017 +0200
+
+    tests&&srcFile
+
+commit 9fd3f48c69c45c883d7e315ac6c0e0f5dc8ab47b
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Sat Nov 25 21:20:27 2017 +0200
+
+    Added copy c'tor for board, overloaded cell assignment operator
+
+commit 58586a8308e3a3f41f8ccf1b6eb4ddd4e0681aae
+Merge: c46cae1 f922502
+Author: orlion312 <orlion312.gmail.com>
+Date:   Fri Nov 24 18:06:51 2017 +0200
+
+    testB3
+
+commit c46cae10a7e5234029800489b47c791f87b0032d
+Merge: c5a4c7a f029103
+Author: orlion312 <orlion312.gmail.com>
+Date:   Fri Nov 24 18:03:52 2017 +0200
+
+    testB2
+
+commit f922502c5274d630e983b9bed0ad4b56c91dc259
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Fri Nov 24 18:03:44 2017 +0200
+
+    test2
+
+commit c5a4c7afe56fa4365b21e37dcfec2faf64280c79
+Author: orlion312 <orlion312.gmail.com>
+Date:   Fri Nov 24 18:01:16 2017 +0200
+
+    testB
+
+commit f02910370a6a5c695a2e3034ee9e556cb9ffcb39
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Fri Nov 24 18:00:43 2017 +0200
+
+    test
+
+commit c3f0ad535b9dc39173989e3eb54291a75329e2c8
+Author: orlion312 <orlion312.gmail.com>
+Date:   Fri Nov 24 17:59:02 2017 +0200
+
+    test1
+
+commit ede52651519029469a507261c443a3143d6ce9e9
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Fri Nov 24 17:48:46 2017 +0200
+
+    Initial Project Commit
+
+commit 68ad50f7a903d4166ba661d39e91619f98bc6f2d
+Author: DanoneHarta <DanoneHarta@users.noreply.github.com>
+Date:   Fri Nov 24 17:09:24 2017 +0200
+
+    Initial commit
