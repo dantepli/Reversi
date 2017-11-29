@@ -1,3 +1,4 @@
+
 #ifndef STDLOGIC_H
 #define STDLOGIC_H
 #include "Logic.h"

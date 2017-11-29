@@ -4,10 +4,6 @@
 #include "Display.h"
 class ConsoleDisplay : public Display {
  public:
-  /**
-   * prints the board to the console.
-   * @param board - a board.
-   */
   virtual void displayBoard(Board &board) const;
   virtual void displayHumanPlayerChoiceMessage(const Player &player,
                                                const vector<Cell *> &moves) const;

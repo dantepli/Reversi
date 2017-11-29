@@ -12,6 +12,14 @@ class Game {
    * Default C'tor. Creates the game with 2 Human players and a board size 8.
    */
   Game();
+  /**
+   *
+   * @param display - a display to display the game.
+   * @param board - a board.
+   * @param logic - game logic.
+   * @param white - a player with white disks.
+   * @param black - a player with black disks.
+   */
   Game(Display *display,
        Board *board,
        Logic *logic,
