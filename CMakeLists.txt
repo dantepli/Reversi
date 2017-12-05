@@ -3,17 +3,17 @@ project(Reversi)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_subdirectory(lib/googletest-release-1.8.0)
-include_directories(lib/googletest-release-1.8.0/googletest/include)
-include_directories(lib/googletest-release-1.8.0/googlemock/include)
+add_subdirectory(src/client/lib/googletest-release-1.8.0)
+include_directories(src/client/lib/googletest-release-1.8.0/googletest/include)
+include_directories(src/client/lib/googletest-release-1.8.0/googlemock/include)
 
 set(SOURCE_FILES
-        src/Board.cpp
-        include/Board.h
-        src/Cell.cpp include/Cell.h include/Globals.h include/Player.h src/HumanPlayer.cpp include/HumanPlayer.h include/Logic.h src/StdLogic.cpp include/StdLogic.h src/Game.cpp include/Game.h include/Display.h src/ConsoleDisplay.cpp include/ConsoleDisplay.h src/CompPlayer.cpp include/CompPlayer.h include/Menu.h src/ConsoleMenu.cpp include/ConsoleMenu.h)
+        src/client/src/Board.cpp
+        src/client/include/Board.h
+        src/client/src/Cell.cpp src/client/include/Cell.h src/client/include/Globals.h src/client/include/Player.h src/client/src/HumanPlayer.cpp src/client/include/HumanPlayer.h src/client/include/Logic.h src/client/src/StdLogic.cpp src/client/include/StdLogic.h src/client/src/Game.cpp src/client/include/Game.h src/client/include/Display.h src/client/src/ConsoleDisplay.cpp src/client/include/ConsoleDisplay.h src/client/src/CompPlayer.cpp src/client/include/CompPlayer.h src/client/include/Menu.h src/client/src/ConsoleMenu.cpp src/client/include/ConsoleMenu.h)
 set(TEST_FILES
-        tests/main_test.cpp tests/Board_test.cpp src/Board.cpp include/Board.h src/Cell.cpp include/Cell.h include/Globals.h include/Player.h src/HumanPlayer.cpp include/HumanPlayer.h include/Logic.h src/StdLogic.cpp include/StdLogic.h src/Game.cpp include/Game.h include/Display.h src/ConsoleDisplay.cpp include/ConsoleDisplay.h src/CompPlayer.cpp include/CompPlayer.h tests/Cell_test.cpp tests/StdLogic_test.cpp tests/Board_test.h include/Menu.h src/ConsoleMenu.cpp include/ConsoleMenu.h tests/StdLogic_test.h tests/CompPlayer_test.cpp tests/CompPlayer_test.h tests/Board_test.h)
+        src/client/tests/main_test.cpp src/client/tests/Board_test.cpp src/client/src/Board.cpp src/client/include/Board.h src/client/src/Cell.cpp src/client/include/Cell.h src/client/include/Globals.h src/client/include/Player.h src/client/src/HumanPlayer.cpp src/client/include/HumanPlayer.h src/client/include/Logic.h src/client/src/StdLogic.cpp src/client/include/StdLogic.h src/client/src/Game.cpp src/client/include/Game.h src/client/include/Display.h src/client/src/ConsoleDisplay.cpp src/client/include/ConsoleDisplay.h src/client/src/CompPlayer.cpp src/client/include/CompPlayer.h src/client/tests/Cell_test.cpp src/client/tests/StdLogic_test.cpp src/client/tests/Board_test.h src/client/include/Menu.h src/client/src/ConsoleMenu.cpp src/client/include/ConsoleMenu.h src/client/tests/StdLogic_test.h src/client/tests/CompPlayer_test.cpp src/client/tests/CompPlayer_test.h src/client/tests/Board_test.h)
 
-add_executable(Reversi ${SOURCE_FILES} main.cpp)
+add_executable(Reversi ${SOURCE_FILES} src/client/main.cpp)
 add_executable(ReversiTest ${TEST_FILES} ${SOURCE_FILES})
 target_link_libraries(ReversiTest gtest gtest_main)
