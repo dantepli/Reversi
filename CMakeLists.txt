@@ -16,4 +16,5 @@ set(TEST_FILES
 
 add_executable(Reversi ${SOURCE_FILES} src/client/main.cpp)
 add_executable(ReversiTest ${TEST_FILES} ${SOURCE_FILES})
+add_executable(Server src/server/main.cpp src/server/Server.cpp src/server/Server.h)
 target_link_libraries(ReversiTest gtest gtest_main)

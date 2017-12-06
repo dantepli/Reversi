@@ -56,14 +56,13 @@ bool Server::handleClient(int currentPlayer,int coPlayer) {
       cout << "Client disconnected" << endl;
       return false;
     }
-    ]
     n = write(coPlayer, &msg, sizeof(msg));
     if (n == -1) {
       cout << "Error writing to socket" << endl;
       return false;
     }
     if (strcmp(reinterpret_cast<const char *>(&msg), "End")) {
-
+      return false;
     }
 }
 
