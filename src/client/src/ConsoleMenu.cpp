@@ -7,8 +7,9 @@ int ConsoleMenu::getOpponentChoice() const {
   cout << "Please choose your opponent: " << endl;
   cout << "1. Press 1 to play against a Local Human Player." << endl;
   cout << "2. Press 2 to play against an AI Player." << endl;
+  cout << "3. Press 3 to play against a Remote Player." << endl;
   cin >> input;
-  while (input != 1 && input != 2) {
+  while (input != 1 && input != 2 && input != 3) {
     if (cin.fail()) {
       // clear the input.
       cin.clear();

@@ -3,7 +3,9 @@ HumanPlayer::HumanPlayer(Display *display, char color)
     : display(display), color(color) {}
 HumanPlayer::~HumanPlayer() {}
 Cell HumanPlayer::pickMove(vector<Cell *> &moves) const {
-//  printMessage(moves);
+  if (moves.size() == 0) {
+    return Cell(-1, -1);
+  }
   display->displayHumanPlayerChoiceMessage(*this, moves);
   int row = 0, col = 0;
   cin >> row >> col;

@@ -28,6 +28,7 @@ Game::~Game() {
 void Game::playTurn(const Player &player) {
   display->displayBoard(*board);
   vector<Cell *> moves = logic->getPossibleMoves(player, *board);
+  Cell cell = player.pickMove(moves);
   if (moves.size() == 0) {
     updateMoves(player, false);
     display->displayNoMoves(player);
@@ -35,7 +36,6 @@ void Game::playTurn(const Player &player) {
   } else {
     updateMoves(player, true);
   }
-  Cell cell = player.pickMove(moves);
   int row = cell.getRow();
   int col = cell.getCol();
   Cell *changedCell = board->getCell(row, col);
