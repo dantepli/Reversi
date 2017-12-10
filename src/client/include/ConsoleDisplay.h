@@ -14,6 +14,7 @@ class ConsoleDisplay : public Display {
                                 int player1Score,
                                 int player2Score) const;
   virtual void displayAIChoice(const Player &player, const Cell &cell) const;
+  virtual void displayWaitingForPlayer() const;
 };
 
 #endif //CONSOLEDISPLAY_H

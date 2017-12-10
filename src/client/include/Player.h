@@ -14,6 +14,10 @@ class Player {
    */
   virtual Cell pickMove(vector<Cell *> &moves) const = 0;
   /**
+   * notifies the player of end game.
+   */
+  virtual void endGame() const = 0;
+  /**
    *
    * @return - color of the player.
    */

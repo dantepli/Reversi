@@ -21,6 +21,7 @@ class NetworkPlayer : public Player {
    * @return - picked cell from the server.
    */
   virtual Cell pickMove(vector<Cell *> &moves) const;
+  virtual void endGame() const;
   virtual char getColor() const;
   /**
    * D'tor. NOTE: DOES NOT DELETE THE DISPLAY AND CLIENT.

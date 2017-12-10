@@ -33,7 +33,7 @@ void Client::connectToServer() {
               sizeof(serverAddress)) == -1) {
     throw "Error connecting to server";
   }
-  cout << "Connected to server" << clientSocket << endl;
+  cout << "Connected to server" << endl;
 }
 void Client::sendMsg(const char *msg) {
   // Write the message to the socket

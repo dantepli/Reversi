@@ -41,5 +41,9 @@ class Display {
    */
   virtual void displayAIChoice(const Player &player,
                                const Cell &cell) const = 0;
+  /**
+   * displays a waiting for player message.
+   */
+  virtual void displayWaitingForPlayer() const = 0;
 };
 #endif //DISPLAY_H

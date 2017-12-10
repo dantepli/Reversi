@@ -38,3 +38,6 @@ bool HumanPlayer::cellValidity(Cell &cell, vector<Cell *> &moves) const {
   }
   return false;
 }
+void HumanPlayer::endGame() const {
+
+}

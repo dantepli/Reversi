@@ -72,3 +72,6 @@ int CompPlayer::detScore(Board &b) const {
   }
   return opponentScore - myScore;
 }
+void CompPlayer::endGame() const {
+
+}

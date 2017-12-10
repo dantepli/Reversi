@@ -4,6 +4,7 @@
 #include "include/Client.h"
 #include "include/NetworkPlayer.h"
 #include "include/LocalPlayer.h"
+#include "include/NetworkParser.h"
 void startNetworkGame();
 int main() {
   Menu *menu = new ConsoleMenu();
@@ -39,12 +40,22 @@ void startNetworkGame() {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
-  Client *client = new Client("127.0.0.1", 9500);
-  client->connectToServer();
+  NetworkParser parser("../exe/net_config.txt");
+  Client *client = new Client(parser.getIP().c_str(), parser.getPort());
+  try {
+    client->connectToServer();
+  } catch (const char *error) {
+    cout << "Error Occurred: " << error << endl;
+    delete display;
+    delete board;
+    delete logic;
+    delete client;
+    exit(-1);
+  }
+  display->displayWaitingForPlayer();
   char *initialColor = client->receiveMsg();
   if (strcmp(initialColor, "1") == 0) {
     // local player color is black.
-    cout << "RECIEVED 1" << endl;
     Player *human = new HumanPlayer(display, Globals::kBlacks);
     Player *local = new LocalPlayer(human, client);
     Player *network = new NetworkPlayer(display, client, Globals::kWhites);
@@ -52,10 +63,9 @@ void startNetworkGame() {
     g.play();
   } else {
     // local player color is white.
-    cout << "REICEVED 2" << endl;     
-    Player *human = new HumanPlayer(display, Globals::kWhites);
-    //Player *AI = new CompPlayer(display, board, logic, Globals::kWhites);
-    Player *local = new LocalPlayer(human, client);
+//    Player *human = new HumanPlayer(display, Globals::kWhites);
+    Player *AI = new CompPlayer(display, board, logic, Globals::kWhites);
+    Player *local = new LocalPlayer(AI, client);
     Player *network = new NetworkPlayer(display, client, Globals::kBlacks);
     Game g(display, board, logic, local, network);
     g.play();

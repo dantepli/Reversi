@@ -24,3 +24,5 @@ Cell NetworkPlayer::pickMove(vector<Cell *> &moves) const {
 char NetworkPlayer::getColor() const {
   return color;
 }
+void NetworkPlayer::endGame() const {
+}

@@ -22,6 +22,7 @@ class CompPlayer : public Player {
    * @return - a picked cell to place the disk.
    */
   virtual Cell pickMove(vector<Cell *> &moves) const;
+  virtual void endGame() const;
   virtual char getColor() const;
  private:
   Display *display;

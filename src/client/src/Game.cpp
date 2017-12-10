@@ -47,6 +47,8 @@ void Game::play() {
     playTurn(*black);
     playTurn(*white);
   }
+  black->endGame();
+  white->endGame();
   determineHighScore(*white, *black);
 }
 void Game::determineHighScore(const Player &player1, const Player &player2) {

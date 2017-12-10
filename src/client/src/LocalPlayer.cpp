@@ -23,3 +23,6 @@ Cell LocalPlayer::pickMove(vector<Cell *> &moves) const {
 char LocalPlayer::getColor() const {
   return player->getColor();
 }
+void LocalPlayer::endGame() const {
+  client->sendMsg("End");
+}

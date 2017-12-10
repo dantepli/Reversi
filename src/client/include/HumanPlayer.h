@@ -17,6 +17,7 @@ class HumanPlayer : public Player {
    * @return - a chosen cell to place the disk.
    */
   virtual Cell pickMove(vector<Cell *> &moves) const;
+  virtual void endGame() const;
   /**
    *
    * @return - player's color.

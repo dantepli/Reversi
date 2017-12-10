@@ -24,6 +24,10 @@ class LocalPlayer: public Player {
    * @return - a picked cell.
    */
   virtual Cell pickMove(vector<Cell *> &moves) const;
+  /**
+   * sends end message to the server.
+   */
+  virtual void endGame() const;
   virtual char getColor() const;
  private:
   Player *player;

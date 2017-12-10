@@ -57,4 +57,7 @@ void ConsoleDisplay::displayAIChoice(const Player &player,
   cout << endl;
   cout << player.getColor() << " picked: " << cell.toCoordinate() << endl;
 }
+void ConsoleDisplay::displayWaitingForPlayer() const {
+  cout << "Waiting for other player to join..." << endl;
+}
 
