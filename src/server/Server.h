@@ -8,15 +8,16 @@
 
 class Server {
  public:
-  Server(int port);
-  void start();
-  void stop();
+  Server(int port); // constructor.
+  void start(); // starts the server.
+  void stop(); // stops the server.
  private:
   int port;
   int serverSocket; // the socket's file descriptor
-  bool handleClient(int currentPlayer,int coPlayer);
-  int acceptClient(int &client);
-  void setUpServer();
+  bool handleClient(int currentPlayer,int coPlayer); // run each client.
+  int acceptClient(int &client); // accept each connections of the client.
+  void setUpServer(); // setting up the server.
+  void setUpClients(int firstClient, int secondClient); // give each client is number.
 };
 
 #endif //REVERSI_SERVER_H

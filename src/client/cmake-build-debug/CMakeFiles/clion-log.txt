@@ -1,0 +1,1 @@
+CMakeLists.txt not found in /home/orlion/CLionProjects/Reversi/src/client

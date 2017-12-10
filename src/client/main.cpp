@@ -52,10 +52,10 @@ void startNetworkGame() {
     g.play();
   } else {
     // local player color is white.
-    cout << "REICEVED 2" << endl;
-//      Player *human = new HumanPlayer(display, Globals::kWhites);
-    Player *AI = new CompPlayer(display, board, logic, Globals::kWhites);
-    Player *local = new LocalPlayer(AI, client);
+    cout << "REICEVED 2" << endl;     
+    Player *human = new HumanPlayer(display, Globals::kWhites);
+    //Player *AI = new CompPlayer(display, board, logic, Globals::kWhites);
+    Player *local = new LocalPlayer(human, client);
     Player *network = new NetworkPlayer(display, client, Globals::kBlacks);
     Game g(display, board, logic, local, network);
     g.play();

@@ -3,11 +3,16 @@
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 #define MAX_LEN 10
-
+/**
+ * 
+ * @param port 
+ */
 Server::Server(int port) : port(port), serverSocket(0) {
   cout << "Server" << endl;
 }
-
+/**
+ * 
+ */
 void Server::start() {
   bool clientOne = true, clientTwo = true;
   bool keepPlaying = true;
@@ -27,13 +32,16 @@ void Server::start() {
       throw "Error accept";
     }
     cout << "Player 2 connected" << endl;
-    char msg[MAX_LEN] = {'1', '2'};
-    int n = write(firstClient, &msg[0], 1);
-    n = write(secondClient, &msg[1], 1);
+    this->setUpClients(firstClient,secondClient);
     while (keepPlaying) {
       cout << "PLAYER 1" << endl;
       clientOne = handleClient(firstClient, secondClient);
       cout << "PLAYER 2" << endl;
+      if (!(clientOne) || !(clientTwo)) {
+        keepPlaying = false;
+        cout << "CLOSED" << endl;
+        continue;
+      }
       clientTwo = handleClient(secondClient, firstClient);
       if (!(clientOne) || !(clientTwo)) {
         keepPlaying = false;
@@ -51,7 +59,12 @@ void Server::start() {
 void Server::stop() {
   close(serverSocket);
 }
-
+/**
+ * 
+ * @param currentPlayer 
+ * @param coPlayer 
+ * @return 
+ */
 bool Server::handleClient(int currentPlayer, int coPlayer) {
   char msg[MAX_LEN];
   int n = read(currentPlayer, &msg, sizeof(msg));
@@ -76,7 +89,11 @@ bool Server::handleClient(int currentPlayer, int coPlayer) {
   }
   return true;
 }
-
+/**
+ * 
+ * @param client 
+ * @return 
+ */
 int Server::acceptClient(int &client) {
   struct sockaddr_in clientAddress;
   socklen_t clientAddressLen;
@@ -85,7 +102,9 @@ int Server::acceptClient(int &client) {
                   &clientAddressLen);
   return client;
 }
-
+/**
+ * 
+ */
 void Server::setUpServer() {
 // Create a socket point
   serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -104,5 +123,15 @@ void Server::setUpServer() {
   }
   // Start listening to incoming connections
   listen(serverSocket, MAX_CONNECTED_CLIENTS);
+}
+/**
+ * 
+ * @param firstClient 
+ * @param secondClient 
+ */
+void Server::setUpClients(int firstClient, int secondClient) {
+  char msg[MAX_LEN] = {'1', '2'};
+  int n = write(firstClient, &msg[0], 1);
+  n = write(secondClient, &msg[1], 1);
 }
 
