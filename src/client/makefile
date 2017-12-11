@@ -6,4 +6,4 @@ compile:
 	g++ -Iinclude/ -c src/*.cpp main.cpp
 
 run:
-	./client.out
+	./../../exe/client.out

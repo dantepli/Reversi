@@ -26,7 +26,7 @@ void Server::start() {
       throw "Error accept";
     }
     cout << "Player 2 connected" << endl;
-    this->setUpClients(firstClient,secondClient);
+    this->setUpClients(firstClient, secondClient);
     while (keepPlaying) {
       keepPlaying = handleClient(firstClient, secondClient);
       if (!(keepPlaying)) {

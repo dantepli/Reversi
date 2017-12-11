@@ -58,7 +58,7 @@ void Game::play() {
   black->endGame();
   white->endGame();
   if (crashed) {
-    cerr << "Other player disconnected" << endl;
+    cerr << "Other player disconnected. Exiting..." << endl;
     return;
   }
   determineHighScore(*white, *black);

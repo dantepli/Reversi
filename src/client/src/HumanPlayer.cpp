@@ -16,7 +16,7 @@ Cell HumanPlayer::pickMove(vector<Cell *> &moves) const {
   }
   Cell picked(row - 1, col - 1);
   while (!cellValidity(picked, moves)) {
-    cout << "Please enter a valid move." << endl;
+    display->displayInvalidMove();
     cin >> row >> col;
     if (cin.fail()) {
       cin.clear();

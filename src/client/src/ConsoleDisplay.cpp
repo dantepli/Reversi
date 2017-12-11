@@ -63,4 +63,7 @@ void ConsoleDisplay::displayWaitingForPlayer() const {
 void ConsoleDisplay::displayWaitingForChoice() const {
   cout << "Waiting for other player's move..." << endl;
 }
+void ConsoleDisplay::displayInvalidMove() const {
+  cout << "Please enter a valid move." << endl;
+}
 

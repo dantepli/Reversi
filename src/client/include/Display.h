@@ -49,5 +49,9 @@ class Display {
    * displays a waiting for other player's choice message.
    */
   virtual void displayWaitingForChoice() const = 0;
+  /**
+   * displays move invalidity message.
+   */
+  virtual void displayInvalidMove() const = 0;
 };
 #endif //DISPLAY_H
