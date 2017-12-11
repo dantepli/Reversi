@@ -3,16 +3,11 @@
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 #define MAX_LEN 10
-/**
- * C'tor.
- * @param port
- */
+// constructor.
 Server::Server(int port) : port(port), serverSocket(0) {
   cout << "Server" << endl;
 }
-/**
- * start the server and handle the clients.
- */
+// starts the server.
 void Server::start() {
   bool keepPlaying = true;
   int firstClient, secondClient;
@@ -49,16 +44,11 @@ void Server::start() {
     keepPlaying = true;
   }
 }
-
+// stops the server.
 void Server::stop() {
   close(serverSocket);
 }
-/**
- * handles the clients by sending and receiving their messages.
- * @param currentPlayer the client that send the message.
- * @param coPlayer  the client receiving the message.
- * @return a bool statement that let us know if to keep playing the game.
- */
+
 bool Server::handleClient(int currentPlayer, int coPlayer) {
   int n;
   char msg[MAX_LEN];
@@ -78,11 +68,7 @@ bool Server::handleClient(int currentPlayer, int coPlayer) {
   }
   return strcmp(reinterpret_cast<const char *>(&msg), "End") != 0;
 }
-/**
- * Accepting each client that connect to server.
- * @param client 
- * @return 
- */
+// accept each connections of the client.
 int Server::acceptClient(int &client) {
   struct sockaddr_in clientAddress = {};
   socklen_t clientAddressLen;
@@ -91,9 +77,7 @@ int Server::acceptClient(int &client) {
                   &clientAddressLen);
   return client;
 }
-/**
- * Setting up the server.
- */
+// setting up the server.
 void Server::setUpServer() {
 // Create a socket point
   serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -113,11 +97,7 @@ void Server::setUpServer() {
   // Start listening to incoming connections
   listen(serverSocket, MAX_CONNECTED_CLIENTS);
 }
-/**
- * Give the clients their numbers(who is first to play).
- * @param firstClient the first player.
- * @param secondClient the second player.
- */
+// give each client is number.
 void Server::setUpClients(int firstClient, int secondClient) {
   int n;
   char msg[MAX_LEN] = {'1', '2'};

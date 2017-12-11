@@ -1,10 +1,3 @@
 Dan Teplitski 312895147	Recitation Group: 03
 Or Lion 204025175	Recitation Group: 04
 
-Reasons for code choice:
-We agreed upon a general UML Design before approaching this exercise, therefore,
-the general code design was similar, we reviewed both implementations and agreed
-that we should take mainly Dan's code because of merging simplicity, and took the ideas 
-for the menu template from Or's code.
-
-
