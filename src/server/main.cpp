@@ -8,7 +8,7 @@ int main() {
   string portDelim = "port:";
   string portStr;
   string line;
-  ifstream myfile ("server_config.txt");
+  ifstream myfile("server_config.txt");
   if (myfile.is_open()) {
     myfile >> portStr;
     portStr = portStr.substr(portStr.find(portDelim) + portDelim.size());

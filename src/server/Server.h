@@ -28,7 +28,7 @@ class Server {
  * @param coPlayer  the client receiving the message.
  * @return a bool statement that let us know if to keep playing the game.
  */
-  bool handleClient(int currentPlayer,int coPlayer);
+  bool handleClient(int currentPlayer, int coPlayer);
   /**
  * Accepting each client that connect to server.
  * @param client
