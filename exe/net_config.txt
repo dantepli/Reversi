@@ -1,6 +1,2 @@
 ip:127.0.0.1
-<<<<<<< Updated upstream
 port:9555
-=======
-port:9544
->>>>>>> Stashed changes
