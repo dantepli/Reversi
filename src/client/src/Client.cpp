@@ -37,7 +37,6 @@ void Client::connectToServer() {
 }
 void Client::sendMsg(const char *msg) {
   // Write the message to the socket
-  cout << "MESSAGE TO SEND: " << msg << endl;
   int n = write(clientSocket, msg, strlen(msg) + 1);
   if (n == -1) {
     throw "Error writing message to socket";
@@ -46,8 +45,7 @@ void Client::sendMsg(const char *msg) {
 char *Client::receiveMsg() {
   int n = read(clientSocket, &msg, sizeof(msg));
   if (n == -1) {
-      throw "Error reading message from socket";
+    throw "Error reading message from socket";
   }
-  cout << "RECEIVED: " << msg << endl;
   return msg;
 }

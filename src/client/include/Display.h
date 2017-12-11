@@ -45,5 +45,9 @@ class Display {
    * displays a waiting for player message.
    */
   virtual void displayWaitingForPlayer() const = 0;
+  /**
+   * displays a waiting for other player's choice message.
+   */
+  virtual void displayWaitingForChoice() const = 0;
 };
 #endif //DISPLAY_H

@@ -1,9 +1,9 @@
 server.out: compile
-	g++ -o server.out *.o
+	g++ -o ../../exe/server.out *.o
 	rm -f *.o
 
 compile:
 	g++ -c *.cpp
 
 run:
-	./server.out
+	./../../exe/server.out

@@ -41,6 +41,7 @@ class Game {
   Player *black;
   bool whiteMoves;
   bool blackMoves;
+  bool crashed;
   /**
    * plays a turn.
    * @param player - a player.

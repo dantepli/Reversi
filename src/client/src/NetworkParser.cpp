@@ -17,7 +17,8 @@ void NetworkParser::parseFile() {
   ifstream inFile;
   inFile.open(fileName.c_str());
   if (!inFile.is_open()) {
-    cout << "Error Opening File." << endl;
+    cerr << "Error Opening File." << endl;
+    return;
   }
   inFile >> ip;
   ip = ip.substr(ip.find(ipDelim) + ipDelim.size());

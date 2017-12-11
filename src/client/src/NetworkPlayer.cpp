@@ -4,10 +4,15 @@ NetworkPlayer::NetworkPlayer(Display *display, Client *client, char color)
 NetworkPlayer::~NetworkPlayer() {}
 Cell NetworkPlayer::pickMove(vector<Cell *> &moves) const {
   int row = 0, col = 0;
-  cout << "WAITING FOR NETWORK MESSAGE" << endl;
+  char *msg;
+  display->displayWaitingForChoice();
   // get message from server.
-  char *msg = client->receiveMsg();
-  cout << "NETWORK PLAYER RECIEVED: " << msg << endl;
+  try {
+    msg = client->receiveMsg();
+  } catch (const char *error) {
+    cerr << "Failed reading from server" << endl;
+    exit(1);
+  }
   if (strcmp(msg, "End") == 0) {
     return Cell(row, col);
   }
@@ -15,9 +20,12 @@ Cell NetworkPlayer::pickMove(vector<Cell *> &moves) const {
     return Cell(row, col);
   }
   // parse message.
+  string check = msg;
+  if (check.find(SEPARATOR) == string::npos) {
+    return Cell(-1, -1);
+  }
   row = atoi(strtok(msg, SEPARATOR));
   col = atoi(strtok(NULL, SEPARATOR));
-  cout << "NETWORK: " << row << " " << col << endl;
   display->displayAIChoice(*this, Cell(row, col));
   return Cell(row, col);
 }

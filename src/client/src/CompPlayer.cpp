@@ -4,7 +4,7 @@ CompPlayer::CompPlayer(Display *display, Board *board, Logic *logic, char color)
     : display(display), board(board), logic(logic), color(color) {}
 Cell CompPlayer::pickMove(vector<Cell *> &moves) const {
   if (moves.size() == 0) {
-    return Cell(-1, -1);
+    return Cell();
   }
   int minScore = INT_MAX;
   Cell picked;

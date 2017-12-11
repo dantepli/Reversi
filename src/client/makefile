@@ -1,5 +1,5 @@
 client.out: compile
-	g++ -o client.out *.o 
+	g++ -o ../../exe/client.out *.o 
 	rm -f *.o
 
 compile:

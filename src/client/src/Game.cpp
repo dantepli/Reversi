@@ -1,5 +1,5 @@
 #include "../include/Game.h"
-Game::Game() : blackMoves(true), whiteMoves(true) {
+Game::Game() : blackMoves(true), whiteMoves(true), crashed(false) {
   board = new Board(Globals::kSize);
   logic = new StdLogic();
   display = new ConsoleDisplay();
@@ -17,7 +17,7 @@ Game::Game(Display *display,
       white(white),
       black(black),
       blackMoves(true),
-      whiteMoves(true) {};
+      whiteMoves(true), crashed(false) {};
 Game::~Game() {
   delete board;
   delete logic;
@@ -29,6 +29,11 @@ void Game::playTurn(const Player &player) {
   display->displayBoard(*board);
   vector<Cell *> moves = logic->getPossibleMoves(player, *board);
   Cell cell = player.pickMove(moves);
+  Cell crashCheck(-1, -1);
+  if (cell == crashCheck) {
+    crashed = true;
+    return;
+  }
   if (moves.size() == 0) {
     updateMoves(player, false);
     display->displayNoMoves(player);
@@ -43,12 +48,19 @@ void Game::playTurn(const Player &player) {
   logic->flip(player, *changedCell, *board);
 }
 void Game::play() {
-  while (blackMoves || whiteMoves) {
+  while ((!crashed) && (blackMoves || whiteMoves)) {
     playTurn(*black);
+    if (crashed) {
+      continue;
+    }
     playTurn(*white);
   }
   black->endGame();
   white->endGame();
+  if (crashed) {
+    cerr << "Other player disconnected" << endl;
+    return;
+  }
   determineHighScore(*white, *black);
 }
 void Game::determineHighScore(const Player &player1, const Player &player2) {

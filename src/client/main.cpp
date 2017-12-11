@@ -10,14 +10,12 @@ int main() {
   Menu *menu = new ConsoleMenu();
   int input = menu->showMainMenu();
   switch (input) {
-    case 1:
-    {
+    case 1: {
       Game g;
       g.play();
       break;
     }
-    case 2:
-    {
+    case 2: {
       Display *display = new ConsoleDisplay();
       Board *board = new Board(Globals::kSize);
       Logic *logic = new StdLogic();
@@ -27,9 +25,9 @@ int main() {
       g.play();
       break;
     }
-    case 3:
-      startNetworkGame();
+    case 3:startNetworkGame();
       break;
+    default:break;
 
   }
   delete menu;
@@ -40,17 +38,18 @@ void startNetworkGame() {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
-  NetworkParser parser("../exe/net_config.txt");
+//  NetworkParser parser("../exe/net_config.txt");
+  NetworkParser parser("net_config.txt");
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
   try {
     client->connectToServer();
   } catch (const char *error) {
-    cout << "Error Occurred: " << error << endl;
+    cerr << "Error Occurred: " << error << endl;
     delete display;
     delete board;
     delete logic;
     delete client;
-    exit(-1);
+    exit(1);
   }
   display->displayWaitingForPlayer();
   char *initialColor = client->receiveMsg();

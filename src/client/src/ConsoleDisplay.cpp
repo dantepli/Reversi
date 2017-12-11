@@ -60,4 +60,7 @@ void ConsoleDisplay::displayAIChoice(const Player &player,
 void ConsoleDisplay::displayWaitingForPlayer() const {
   cout << "Waiting for other player to join..." << endl;
 }
+void ConsoleDisplay::displayWaitingForChoice() const {
+  cout << "Waiting for other player's move..." << endl;
+}
 

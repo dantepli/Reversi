@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "../include/LocalPlayer.h"
 LocalPlayer::LocalPlayer(Player *player, Client *client)
     : player(player), client(client) {}
@@ -8,14 +9,18 @@ Cell LocalPlayer::pickMove(vector<Cell *> &moves) const {
   Cell picked = player->pickMove(moves);
   if (moves.size() == 0) {
     // no moves.
-    client->sendMsg("NoMove");
+    try {
+      client->sendMsg("NoMove");
+    } catch (const char *error) {
+      cerr << error << endl;
+      exit(1);
+    }
     return Cell();
   }
   // parse the cell position.
   ostringstream messageParse;
   messageParse << picked.getRow();
   messageParse << SEPARATOR << picked.getCol();
-  cout << "SENT: " << messageParse.str().c_str() << endl;
   // send to server.
   client->sendMsg(messageParse.str().c_str());
   return picked;

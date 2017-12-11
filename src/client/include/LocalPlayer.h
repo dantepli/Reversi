@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Client.h"
 #define SEPARATOR ", "
-class LocalPlayer: public Player {
+class LocalPlayer : public Player {
  public:
   /**
    * C'tor. Supports player-serverClient integration.
