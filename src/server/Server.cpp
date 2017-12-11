@@ -14,7 +14,6 @@ Server::Server(int port) : port(port), serverSocket(0) {
  * start the server and handle the clients.
  */
 void Server::start() {
-  bool clientOne = true, clientTwo = true;
   bool keepPlaying = true;
   int firstClient, secondClient;
   this->setUpServer();
@@ -34,20 +33,19 @@ void Server::start() {
     cout << "Player 2 connected" << endl;
     this->setUpClients(firstClient,secondClient);
     while (keepPlaying) {
-      clientOne = handleClient(firstClient, secondClient);
-      if (!(clientOne) || !(clientTwo)) {
+      keepPlaying = handleClient(firstClient, secondClient);
+      if (!(keepPlaying)) {
         keepPlaying = false;
         continue;
       }
-      clientTwo = handleClient(secondClient, firstClient);
-      if (!(clientOne) || !(clientTwo)) {
+      keepPlaying = handleClient(secondClient, firstClient);
+      if (!(keepPlaying)) {
         keepPlaying = false;
       }
     }
     // Close communication with the client
     close(firstClient);
     close(secondClient);
-    clientOne = true, clientTwo = true;
     keepPlaying = true;
   }
 }
@@ -62,8 +60,9 @@ void Server::stop() {
  * @return a bool statement that let us know if to keep playing the game.
  */
 bool Server::handleClient(int currentPlayer, int coPlayer) {
+  int n;
   char msg[MAX_LEN];
-  int n = read(currentPlayer, &msg, sizeof(msg));
+  n = static_cast<int>(read(currentPlayer, &msg, sizeof(msg)));
   if (n == -1) {
     cout << "Error reading msg" << endl;
     return false;
@@ -72,15 +71,12 @@ bool Server::handleClient(int currentPlayer, int coPlayer) {
     cout << "Client disconnected" << endl;
     return false;
   }
-  n = write(coPlayer, &msg, sizeof(msg));
+  n = static_cast<int>(write(coPlayer, &msg, sizeof(msg)));
   if (n == -1) {
     cout << "Error writing to socket" << endl;
     return false;
   }
-  if (!strcmp(reinterpret_cast<const char *>(&msg), "End")) {
-    return false;
-  }
-  return true;
+  return strcmp(reinterpret_cast<const char *>(&msg), "End") != 0;
 }
 /**
  * Accepting each client that connect to server.
@@ -88,7 +84,7 @@ bool Server::handleClient(int currentPlayer, int coPlayer) {
  * @return 
  */
 int Server::acceptClient(int &client) {
-  struct sockaddr_in clientAddress;
+  struct sockaddr_in clientAddress = {};
   socklen_t clientAddressLen;
   client = accept(serverSocket,
                   (struct sockaddr *) &clientAddress,
@@ -105,11 +101,11 @@ void Server::setUpServer() {
     throw "Error opening socket";
   }
   // Assign a local address to the socket
-  struct sockaddr_in serverAddress;
+  struct sockaddr_in serverAddress = {};
   bzero((void *) &serverAddress, sizeof(serverAddress));
   serverAddress.sin_family = AF_INET;
   serverAddress.sin_addr.s_addr = INADDR_ANY;
-  serverAddress.sin_port = htons(port);
+  serverAddress.sin_port = htons(static_cast<uint16_t>(port));
   if (bind(serverSocket, (struct sockaddr *) &serverAddress,
            sizeof(serverAddress)) == -1) {
     throw "Error on binding";
@@ -123,8 +119,15 @@ void Server::setUpServer() {
  * @param secondClient the second player.
  */
 void Server::setUpClients(int firstClient, int secondClient) {
+  int n;
   char msg[MAX_LEN] = {'1', '2'};
-  int n = write(firstClient, &msg[0], 1);
-  n = write(secondClient, &msg[1], 1);
+  n = static_cast<int>(write(firstClient, &msg[0], 1));
+  if (n == -1) {
+    cout << "Error writing to player" << endl;
+  }
+  n = static_cast<int>(write(secondClient, &msg[1], 1));
+  if (n == -1) {
+    cout << "Error writing to player" << endl;
+  }
 }
 
