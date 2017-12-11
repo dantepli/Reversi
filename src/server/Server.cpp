@@ -4,14 +4,14 @@ using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 #define MAX_LEN 10
 /**
- * 
- * @param port 
+ * C'tor.
+ * @param port
  */
 Server::Server(int port) : port(port), serverSocket(0) {
   cout << "Server" << endl;
 }
 /**
- * 
+ * start the server and handle the clients.
  */
 void Server::start() {
   bool clientOne = true, clientTwo = true;
@@ -34,18 +34,14 @@ void Server::start() {
     cout << "Player 2 connected" << endl;
     this->setUpClients(firstClient,secondClient);
     while (keepPlaying) {
-      cout << "PLAYER 1" << endl;
       clientOne = handleClient(firstClient, secondClient);
-      cout << "PLAYER 2" << endl;
       if (!(clientOne) || !(clientTwo)) {
         keepPlaying = false;
-        cout << "CLOSED" << endl;
         continue;
       }
       clientTwo = handleClient(secondClient, firstClient);
       if (!(clientOne) || !(clientTwo)) {
         keepPlaying = false;
-        cout << "CLOSED" << endl;
       }
     }
     // Close communication with the client
@@ -60,15 +56,14 @@ void Server::stop() {
   close(serverSocket);
 }
 /**
- * 
- * @param currentPlayer 
- * @param coPlayer 
- * @return 
+ * handles the clients by sending and receiving their messages.
+ * @param currentPlayer the client that send the message.
+ * @param coPlayer  the client receiving the message.
+ * @return a bool statement that let us know if to keep playing the game.
  */
 bool Server::handleClient(int currentPlayer, int coPlayer) {
   char msg[MAX_LEN];
   int n = read(currentPlayer, &msg, sizeof(msg));
-  cout << "SERVER READ: " << msg << endl;
   if (n == -1) {
     cout << "Error reading msg" << endl;
     return false;
@@ -78,19 +73,17 @@ bool Server::handleClient(int currentPlayer, int coPlayer) {
     return false;
   }
   n = write(coPlayer, &msg, sizeof(msg));
-  cout << "SERVER WROTE: " << msg << endl;
   if (n == -1) {
     cout << "Error writing to socket" << endl;
     return false;
   }
   if (!strcmp(reinterpret_cast<const char *>(&msg), "End")) {
-    cout << "END MESSAGE" << endl;
     return false;
   }
   return true;
 }
 /**
- * 
+ * Accepting each client that connect to server.
  * @param client 
  * @return 
  */
@@ -103,7 +96,7 @@ int Server::acceptClient(int &client) {
   return client;
 }
 /**
- * 
+ * Setting up the server.
  */
 void Server::setUpServer() {
 // Create a socket point
@@ -125,9 +118,9 @@ void Server::setUpServer() {
   listen(serverSocket, MAX_CONNECTED_CLIENTS);
 }
 /**
- * 
- * @param firstClient 
- * @param secondClient 
+ * Give the clients their numbers(who is first to play).
+ * @param firstClient the first player.
+ * @param secondClient the second player.
  */
 void Server::setUpClients(int firstClient, int secondClient) {
   char msg[MAX_LEN] = {'1', '2'};
