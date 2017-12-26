@@ -2,9 +2,7 @@
 CommandsManager::CommandsManager() {
 
 }
-CommandsManager::CommandsManager(Server *server) {
 
-}
 CommandsManager::~CommandsManager() {
 
 }

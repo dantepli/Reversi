@@ -11,12 +11,6 @@ class CommandsManager {
    */
   CommandsManager();
   /**
-   *
-   * @param server - a given server.
-   * @param lobbies - a vector of game lobbies.
-   */
-  CommandsManager(Server *server, vector<GameLobby> &lobbies);
-  /**
    * D'tor.
    */
   ~CommandsManager();

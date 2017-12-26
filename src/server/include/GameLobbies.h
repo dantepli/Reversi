@@ -4,13 +4,13 @@
 #include <map>
 #include "GameLobby.h"
 /**
- * Singelton object.
+ * Singleton object.
  */
 class GameLobbies {
  public:
   /**
    *
-   * @return - the instance of the singelton.
+   * @return - the instance of the singleton.
    */
   static GameLobbies *getInstance();
   /**
@@ -35,7 +35,7 @@ class GameLobbies {
  private:
   map<string, GameLobby*> lobbies;
   GameLobbies() {}
-  static GameLobbies *instance = NULL;
+  static GameLobbies *instance;
 };
 
 #endif //REVERSI_GAMELOBBIES_H

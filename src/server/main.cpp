@@ -1,4 +1,5 @@
 #include "include/Server.h"
+#include "include/GameLobbies.h"
 #include <stdlib.h>
 using namespace std;
 #include <fstream>

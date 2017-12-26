@@ -1,4 +1,4 @@
-#include "GameLobby.h"
+#include "../include/GameLobby.h"
 GameLobby::GameLobby(const string &name, int initialSocket, int joinedSocket)
     : name(name), initialSocket(initialSocket), joinedSocket(joinedSocket) {}
 void GameLobby::setJoinedSocket(int socket) {

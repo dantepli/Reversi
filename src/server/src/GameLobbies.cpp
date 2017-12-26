@@ -1,4 +1,7 @@
 #include "../include/GameLobbies.h"
+
+GameLobbies *GameLobbies::instance = NULL;
+
 GameLobbies *GameLobbies::getInstance() {
   if (instance != NULL) {
     // already initialized.
@@ -17,10 +20,14 @@ bool GameLobbies::addLobby(string lobbyName, int socket) {
   return true;
 }
 bool GameLobbies::removeLobby(string lobbyName) {
-  return false;
+  size_t removed = lobbies.erase(lobbyName);
+  return removed > 0; // if erase was successful removed value is 1.
 }
 GameLobby *GameLobbies::getLobby(string lobbyName) {
-  return NULL;
+  map<string, GameLobby *>::iterator it = lobbies.find(lobbyName);
+  if (it == lobbies.end()) {
+    return NULL;
+  }
+  return it->second; // GameLobby*
 }
 
-GameLobbies::GameLobbies() {}
