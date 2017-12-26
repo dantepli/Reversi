@@ -3,6 +3,7 @@
 #include <map>
 #include "Command.h"
 #include "Server.h"
+#include "GameLobby.h"
 class CommandsManager {
  public:
   /**
@@ -12,8 +13,9 @@ class CommandsManager {
   /**
    *
    * @param server - a given server.
+   * @param lobbies - a vector of game lobbies.
    */
-  CommandsManager(Server *server);
+  CommandsManager(Server *server, vector<GameLobby> &lobbies);
   /**
    * D'tor.
    */

@@ -16,6 +16,10 @@ void Server::start() {
   while (true) {
     cout << "Waiting for client connections..." << endl;
     // Accept a new client connection
+    /*
+     * GameManager || THIS IS THE FLOW OF THE GAME AFTER JOIN
+     * ######################################################
+     */
     firstClient = acceptClient(firstClient);
     if (firstClient == -1) {
       throw "Error accept";
@@ -38,6 +42,9 @@ void Server::start() {
         keepPlaying = false;
       }
     }
+    /*
+     * ######################################################
+     */
     // Close communication with the client
     close(firstClient);
     close(secondClient);
