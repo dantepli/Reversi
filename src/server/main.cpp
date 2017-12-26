@@ -1,4 +1,4 @@
-#include "Server.h"
+#include "include/Server.h"
 #include <stdlib.h>
 using namespace std;
 #include <fstream>
@@ -8,7 +8,8 @@ int main() {
   string portDelim = "port:";
   string portStr;
   string line;
-  ifstream myfile("server_config.txt");
+  ifstream myfile("../exe/server_config.txt"); // CLION RUN
+  //ifstream myfile("server.config.txt"); // CMD RUN
   if (myfile.is_open()) {
     myfile >> portStr;
     portStr = portStr.substr(portStr.find(portDelim) + portDelim.size());

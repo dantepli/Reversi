@@ -38,7 +38,8 @@ void startNetworkGame() {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
-  NetworkParser parser("net_config.txt");
+  NetworkParser parser("net_config.txt"); // CLION RUN
+  //NetworkParser parser("../exe/net_config.txt"); // CMD RUN
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
   try {
     client->connectToServer();
