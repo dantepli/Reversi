@@ -15,6 +15,11 @@ class GameLobby {
   GameLobby(const string &name, int initialSocket, int joinedSocket = NO_INIT);
   /**
    *
+   * @return - name of the lobby.
+   */
+  string getLobbyName();
+  /**
+   *
    * @param socket - a socket to set as the second player.
    */
   void setJoinedSocket(int socket);

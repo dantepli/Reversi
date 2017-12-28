@@ -2,12 +2,14 @@
 #define REVERSI_COMMANDMANAGER_H
 #include <map>
 #include "Command.h"
-#include "Server.h"
 #include "GameLobby.h"
+#include "StartCommand.h"
+#include "JoinGameCommand.h"
+#include "ListGamesCommand.h"
 class CommandsManager {
  public:
   /**
-   * Default c'tor, initializes a server and the map.
+   * C'tor.
    */
   CommandsManager();
   /**
@@ -22,13 +24,7 @@ class CommandsManager {
   void executeCommand(string command,
                       vector<string> args);
  private:
-  Server *server;
   map<string, Command *> commandsMap;
-  /**
-   * initializes the map with the commands that need to
-   * be supported by the server.
-   */
-  void initMap();
 };
 
 #endif //REVERSI_COMMANDMANAGER_H

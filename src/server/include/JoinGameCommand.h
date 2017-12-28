@@ -1,15 +1,15 @@
 #ifndef REVERSI_JOINGAMECOMMAND_H
 #define REVERSI_JOINGAMECOMMAND_H
 
-#include "Server.h"
+#include <cstdlib>
 #include "Command.h"
+#include "GameLobbies.h"
 class JoinGameCommand: public Command {
  public:
   /**
    *
-   * @param server - a given server.
    */
-  JoinGameCommand(Server *server);
+  JoinGameCommand();
   /**
    * joins a game lobby with the given name, and starts the game.
    * @param args - arguments for the command.
@@ -19,8 +19,6 @@ class JoinGameCommand: public Command {
    * D'tor.
    */
   virtual ~JoinGameCommand();
- private:
-  Server *server;
 };
 
 #endif //REVERSI_JOINGAMECOMMAND_H

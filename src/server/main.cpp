@@ -17,7 +17,9 @@ int main() {
     port = atoi(portStr.c_str());
     myfile.close();
   }
-  Server server(port);
+  CommandsManager *manager = new CommandsManager();
+  ReversiHandler *handler = new ReversiHandler(manager);
+  Server server(handler, port);
   try {
     server.start();
   } catch (const char *msg) {

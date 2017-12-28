@@ -2,14 +2,13 @@
 #define REVERSI_PLAYCOMMAND_H
 
 #include "Command.h"
-#include "Server.h"
 class PlayCommand: public Command {
  public:
   /**
    * C'tor.
    * @param server - a given server.
    */
-  PlayCommand(Server *server);
+  PlayCommand();
   /**
    * sends the given play to the other play.
    * @param args - arguments for the command.
@@ -20,7 +19,6 @@ class PlayCommand: public Command {
    */
   virtual ~PlayCommand();
  private:
-  Server *server;
 };
 
 #endif //REVERSI_PLAYCOMMAND_H

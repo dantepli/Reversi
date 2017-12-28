@@ -2,12 +2,19 @@
 #define REVERSI_GAMELOBBIES_H
 
 #include <map>
+#include <vector>
 #include "GameLobby.h"
+
+#define NO_JOINABLE "No Joinable Games"
 /**
  * Singleton object.
  */
 class GameLobbies {
  public:
+  /**
+   * D'tor. deletes the game lobbies inside.
+   */
+  ~GameLobbies();
   /**
    *
    * @return - the instance of the singleton.
@@ -32,6 +39,13 @@ class GameLobbies {
    * @return - the lobby of the game.
    */
   GameLobby *getLobby(string lobbyName);
+  /**
+   *
+   * @return - a vector of the names of the joinable lobbies,
+   * if there are no joinable games, the vector will contain
+   * "No Joinable Games".
+   */
+  vector<string> getJoinableLobbies();
  private:
   map<string, GameLobby*> lobbies;
   GameLobbies() {}

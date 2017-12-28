@@ -80,7 +80,7 @@ int ConsoleMenu::startGame(Client *client) const {
       }
       sInput = dummy;
     }
-  } while (strcmp(serverResponse, "-1") == 0);
+  } while (strcmp(serverResponse, "1") == 0);
   return BLACK_COLOR;
 }
 

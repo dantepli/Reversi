@@ -1,5 +1,5 @@
 #include "../include/PlayCommand.h"
-PlayCommand::PlayCommand(Server *server) : server(server) {}
+PlayCommand::PlayCommand() {}
 void PlayCommand::execute(vector<string> args) {
 
 }

@@ -7,3 +7,6 @@ void GameLobby::setJoinedSocket(int socket) {
 bool GameLobby::isJoinable() {
   return initialSocket > NO_INIT && joinedSocket > NO_INIT;
 }
+string GameLobby::getLobbyName() {
+  return name;
+}

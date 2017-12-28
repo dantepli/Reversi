@@ -1,15 +1,21 @@
 #ifndef REVERSI_STARTCOMMAND_H
 #define REVERSI_STARTCOMMAND_H
 #include "Command.h"
-#include "Server.h"
-
-class StartCommand: public Command {
+#include "GameLobbies.h"
+#include <string>
+#include <cstdlib>
+#include <iostream>
+#include <cstring>
+#include <unistd.h>
+#define START_SUCCESS "1"
+#define START_FAILED "-1"
+using namespace std;
+class StartCommand : public Command {
  public:
   /**
    * C'tor.
-   * @param server - a given server.
    */
-  StartCommand(Server *server);
+  StartCommand();
   /**
    * starts a game lobby with the name given in the arguments,
    * if the game exits it will not open a new game lobby.
@@ -20,8 +26,6 @@ class StartCommand: public Command {
    * D'tor.
    */
   virtual ~StartCommand();
- private:
-  Server *server;
 };
 
 #endif //REVERSI_STARTCOMMAND_H

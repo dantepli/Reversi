@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(Reversi)
 
 set(CMAKE_CXX_STANDARD 98)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pthread")
 add_subdirectory(src/client/lib/googletest-release-1.8.0)
 include_directories(src/client/lib/googletest-release-1.8.0/googletest/include)
 include_directories(src/client/lib/googletest-release-1.8.0/googlemock/include)

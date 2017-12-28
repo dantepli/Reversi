@@ -15,7 +15,7 @@ using namespace std;
 class ConsoleMenu : public Menu {
  public:
   virtual int showMainMenu() const;
-  int onlineChoices(Client *client) const;
+  virtual int onlineChoices(Client *client) const;
  private:
   int getOpponentChoice() const;
   /**

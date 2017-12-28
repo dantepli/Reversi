@@ -1,14 +1,18 @@
 #ifndef REVERSI_LISTGAMESCOMMAND_H
 #define REVERSI_LISTGAMESCOMMAND_H
 #include "Command.h"
-#include "Server.h"
+#include "GameLobbies.h"
+#include <cstdlib>
+#include <string>
+#include <unistd.h>
+#include <cstring>
+#include <iostream>
 class ListGamesCommand: public Command {
  public:
   /**
    *
-   * @param server - a given server.
    */
-  ListGamesCommand(Server *server);
+  ListGamesCommand();
   /**
    * retrieves a list of game lobbies currently available to join.
    * @param args - arguments for the command.
@@ -18,8 +22,6 @@ class ListGamesCommand: public Command {
    * D'tor.
    */
   virtual ~ListGamesCommand();
- private:
-  Server *server;
 };
 
 #endif //REVERSI_LISTGAMESCOMMAND_H
