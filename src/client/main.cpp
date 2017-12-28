@@ -1,11 +1,10 @@
 #include "include/Game.h"
 #include "include/CompPlayer.h"
 #include "include/ConsoleMenu.h"
-#include "include/Client.h"
 #include "include/NetworkPlayer.h"
 #include "include/LocalPlayer.h"
 #include "include/NetworkParser.h"
-void startNetworkGame();
+void startNetworkGame(Menu *menu);
 int main() {
   Menu *menu = new ConsoleMenu();
   int input = menu->showMainMenu();
@@ -25,7 +24,7 @@ int main() {
       g.play();
       break;
     }
-    case 3:startNetworkGame();
+    case 3:startNetworkGame(menu);
       break;
     default:break;
 
@@ -34,7 +33,7 @@ int main() {
   return 0;
 }
 
-void startNetworkGame() {
+void startNetworkGame(Menu *menu) {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
@@ -51,9 +50,8 @@ void startNetworkGame() {
     delete client;
     exit(1);
   }
-  display->displayWaitingForPlayer();
-  char *initialColor = client->receiveMsg();
-  if (strcmp(initialColor, "1") == 0) {
+  int initialColor = menu->onlineChoices(client);
+  if (initialColor == BLACK_COLOR) {
     // local player color is black.
     Player *human = new HumanPlayer(display, Globals::kBlacks);
     Player *local = new LocalPlayer(human, client);
