@@ -4,26 +4,20 @@ void ListGamesCommand::execute(vector<string> args) {
   int socket = atoi(args[0].c_str());
   GameLobbies *lobbies = GameLobbies::getInstance();
   vector<string> joinable = lobbies->getJoinableLobbies();
-  const char *message;
-  for (int i = 0; i < joinable.size(); i++) {
+  string message;
+  for (int i = 0; i < joinable.size() - 1; i++) {
     // iterates through the names of the lobbies and writes
     // to the client.
-    //server->writeToSocket(joinable[i].c_str(), socket);
-    message = joinable[i].c_str();
-    int n = static_cast<int>(write(socket, &message, strlen(message)));
-    if (n == -1) {
-      cout << "Error writing to socket" << endl;
-      throw "Error writing to socket";
-    }
+    message.append(joinable[i]);
+    message.append(", ");
   }
-  //server->writeToSocket("LIST_END", socket);
-  string end = "LIST_END";
-  message = end.c_str();
-  int n = static_cast<int>(write(socket, &message, strlen(message)));
+  message.append(joinable[joinable.size() - 1]);
+  int n = static_cast<int>(write(socket, message.c_str(), message.size()));
   if (n == -1) {
     cout << "Error writing to socket" << endl;
     throw "Error writing to socket";
   }
+  close(socket);
 }
 ListGamesCommand::~ListGamesCommand() {
 

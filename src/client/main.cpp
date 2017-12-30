@@ -40,18 +40,38 @@ void startNetworkGame(Menu *menu) {
   //NetworkParser parser("net_config.txt"); // CMD RUN
   NetworkParser parser("../exe/net_config.txt"); // CLION RUN
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
-  try {
-    client->connectToServer();
-  } catch (const char *error) {
-    cerr << "Error Occurred: " << error << endl;
-    delete display;
-    delete board;
-    delete logic;
-    delete client;
-    exit(1);
-  }
-  int initialColor = menu->onlineChoices(client);
+//  try {
+//    client->connectToServer();
+//  } catch (const char *error) {
+//    cerr << "Error Occurred: " << error << endl;
+//    delete display;
+//    delete board;
+//    delete logic;
+//    delete client;
+//    exit(1);
+//  }
+  int response = menu->onlineChoices(client);
+  /*
   if (initialColor == BLACK_COLOR) {
+    // local player color is black.
+    Player *human = new HumanPlayer(display, Globals::kBlacks);
+    Player *local = new LocalPlayer(human, client);
+    Player *network = new NetworkPlayer(display, client, Globals::kWhites);
+    Game g(display, board, logic, network, local);
+    g.play();
+  } else {
+    // local player color is white.
+    Player *human = new HumanPlayer(display, Globals::kWhites);
+    Player *local = new LocalPlayer(human, client);
+    Player *network = new NetworkPlayer(display, client, Globals::kBlacks);
+    Game g(display, board, logic, local, network);
+    g.play();
+  }
+  delete client;
+   */
+  char *initialColor = client->receiveMsg();
+  cout << initialColor << "COLOR " << endl;
+  if (strcmp(initialColor, "1") == 0) {
     // local player color is black.
     Player *human = new HumanPlayer(display, Globals::kBlacks);
     Player *local = new LocalPlayer(human, client);

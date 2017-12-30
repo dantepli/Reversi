@@ -8,7 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-#define MAX_LEN 10
+#define MAX_LEN 255
 class Client {
  public:
   /**
@@ -36,6 +36,10 @@ class Client {
   char msg[MAX_LEN];
   int serverPort;
   int clientSocket;
+  /**
+   * clears the previous message leftover.
+   */
+  void clearMessage();
 };
 
 #endif //REVERSI_CLIENT_H

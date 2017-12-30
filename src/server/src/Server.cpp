@@ -1,27 +1,52 @@
 #include "../include/Server.h"
 
 struct handleArgs {
+  int clientSocket;
+  ReversiHandler *handler;
+};
+
+struct acceptArgs {
   int serverSocket;
   ReversiHandler *handler;
 };
 
 void *handleClient(void *handleArgs) {
   struct handleArgs *args = (struct handleArgs *) handleArgs;
+  try {
+    args->handler->handle(args->clientSocket);
+  } catch (const char *msg) {
+    cerr << msg << endl;
+  }
+}
+
+void *acceptClients(void *acceptArgs) {
+  struct acceptArgs *args = (struct acceptArgs *) acceptArgs;
   struct sockaddr_in clientAddress = {};
   socklen_t clientAddressLen;
   int clientSocket;
-  cout << "Waiting for client connections..." << endl;
+  vector<pthread_t> threads;
   cout << args->serverSocket << endl;
-  clientSocket = accept(args->serverSocket,
-                        (struct sockaddr *) &clientAddress,
-                        &clientAddressLen);
-  cout << "CLIENT SOCKET " << clientSocket << endl;
-  try {
-    args->handler->handle(clientSocket);
-  } catch(const char *msg) {
-    cerr << msg << endl;
+  while (true) {
+    cout << "Waiting for client connections..." << endl;
+    clientSocket = accept(args->serverSocket,
+                          (struct sockaddr *) &clientAddress,
+                          &clientAddressLen);
+    if (clientSocket == -1) {
+      throw "Error on accept";
+    }
+    struct handleArgs handleArgs;
+    handleArgs.clientSocket = clientSocket;
+    handleArgs.handler = args->handler;
+    cout << "CLIENT SOCKET " << clientSocket << endl;
+    pthread_t handleThread;
+    int rc =
+        pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
+    threads.push_back(handleThread);
   }
-  close(clientSocket);
+  for (int i = 0; i < threads.size(); i++) {
+    cout << "WAITING ON THREADS" << endl;
+    pthread_join(threads[i], NULL);
+  }
 }
 
 // constructor.
@@ -35,17 +60,13 @@ void Server::start() {
   int firstClient, secondClient;
   this->setUpServer();
   // Define the client socket's structures
-  pthread_t thread;
-  struct handleArgs args;
+  pthread_t acceptThread;
+  struct acceptArgs args;
   cout << serverSocket << "SERVER SOCKET" << endl;
   args.serverSocket = serverSocket;
   args.handler = handler;
-  int rc = pthread_create(&thread, NULL, handleClient, (void *) &args);
-  threads.push_back(thread);
-  for(int i = 0 ; i < threads.size() ; i++) {
-    cout << "WAITING ON THREADS" << endl;
-    pthread_join(threads[i], NULL);
-  }
+  int rc = pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
+  pthread_join(acceptThread, NULL);
   pthread_exit(NULL);
 //  while (true) {
 //    cout << "Waiting for client connections..." << endl;

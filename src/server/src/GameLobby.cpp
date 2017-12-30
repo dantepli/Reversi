@@ -5,8 +5,14 @@ void GameLobby::setJoinedSocket(int socket) {
   joinedSocket = socket;
 }
 bool GameLobby::isJoinable() {
-  return initialSocket > NO_INIT && joinedSocket > NO_INIT;
+  return initialSocket > NO_INIT && joinedSocket == NO_INIT;
 }
 string GameLobby::getLobbyName() {
   return name;
+}
+int GameLobby::getInitialSocket() {
+  return initialSocket;
+}
+int GameLobby::getJoinedSocket() {
+  return joinedSocket;
 }

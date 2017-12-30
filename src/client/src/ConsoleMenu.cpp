@@ -29,6 +29,7 @@ int ConsoleMenu::getOpponentChoice() const {
 int ConsoleMenu::onlineChoices(Client *client) const {
   int input;
   do {
+    client->connectToServer();
     cout << "Please choose one of the options: " << endl;
     cout << "1. Start a new game lobby." << endl;
     cout << "2. Join an existing game lobby." << endl;
@@ -65,22 +66,23 @@ int ConsoleMenu::startGame(Client *client) const {
   string dummy;
   char *serverResponse;
   cout << "Please enter a new lobby name" << endl;
+  cin >> sInput;
   do {
-    cin >> sInput;
     string startCommand = "start ";
     startCommand.append(sInput);
     client->sendMsg(startCommand.c_str());
     serverResponse = client->receiveMsg();
+    cout << "SERVER WROTE " << serverResponse << endl;
     if (strcmp(serverResponse, "-1") == 0) {
       cout << "This game lobby is already registered" << endl;
       cout << "Please enter a new lobby name (return to the last menu with 'back')" << endl;
-      cin >> dummy;
-      if (strcmp(dummy.c_str(), "back") == 0) {
+      cin >> sInput;
+      if (strcmp(sInput.c_str(), "back") == 0) {
         return FAILED;
       }
-      sInput = dummy;
+      client->connectToServer();
     }
-  } while (strcmp(serverResponse, "1") == 0);
+  } while (strcmp(serverResponse, "1") != 0);
   return BLACK_COLOR;
 }
 
@@ -107,8 +109,5 @@ void ConsoleMenu::listGames(Client *client) const {
   client->sendMsg(listGames.c_str());
   cout << "Game rooms: " << endl;
   serverResponse = client->receiveMsg();
-  while (strcmp(serverResponse, "LIST_END") != 0) {
-    cout << serverResponse << endl;
-    serverResponse = client->receiveMsg();
-  }
+  cout << serverResponse << endl;
 }

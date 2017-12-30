@@ -1,4 +1,6 @@
+#include <cstring>
 #include "../include/JoinGameCommand.h"
+#include "../include/GameManager.h"
 JoinGameCommand::JoinGameCommand() {}
 void JoinGameCommand::execute(vector<string> args) {
   GameLobbies *lobbies = GameLobbies::getInstance();
@@ -7,7 +9,12 @@ void JoinGameCommand::execute(vector<string> args) {
   GameLobby *lobby = lobbies->getLobby(lobbyName);
   lobby->setJoinedSocket(socket); // sets the the second player socket.
   // ########### NEED TO START THE GAME.............
+  int n = static_cast<int>(write(socket, "1", 1));
+  sleep(1); // #######################
+  GameManager manager(lobby);
+  manager.play();
 }
+
 JoinGameCommand::~JoinGameCommand() {
 
 }

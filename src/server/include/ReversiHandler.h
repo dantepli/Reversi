@@ -2,6 +2,8 @@
 #define REVERSI_REVERSIHANDLER_H
 
 #include "CommandsManager.h"
+#include <string>
+#include <sstream>
 #define COMMAND_DELIM " "
 #define MAX_LEN 50
 class ReversiHandler {

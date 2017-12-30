@@ -20,6 +20,16 @@ class GameLobby {
   string getLobbyName();
   /**
    *
+   * @return - the initial socket that opened the lobby.
+   */
+  int getInitialSocket();
+  /**
+   *
+   * @return - the socket that joined the lobby.
+   */
+  int getJoinedSocket();
+  /**
+   *
    * @param socket - a socket to set as the second player.
    */
   void setJoinedSocket(int socket);

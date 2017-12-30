@@ -33,19 +33,25 @@ void Client::connectToServer() {
               sizeof(serverAddress)) == -1) {
     throw "Error connecting to server";
   }
-  cout << "Connected to server" << endl;
+  //cout << "Connected to server" << endl;
 }
 void Client::sendMsg(const char *msg) {
   // Write the message to the socket
+  cout << "CLIENT SENT " << msg << endl;
   int n = write(clientSocket, msg, strlen(msg) + 1);
   if (n == -1) {
     throw "Error writing message to socket";
   }
 }
 char *Client::receiveMsg() {
+  clearMessage();
   int n = read(clientSocket, &msg, sizeof(msg));
   if (n == -1) {
     throw "Error reading message from socket";
   }
+  cout << "CLIENT RECIVED: " << msg << endl;
   return msg;
+}
+void Client::clearMessage() {
+  memset(msg, 0, sizeof(msg));
 }

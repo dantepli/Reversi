@@ -15,12 +15,22 @@ void ReversiHandler::handle(int socket) {
   if (n == 0) {
     throw "Client disconnected\n";
   }
-  string command = strtok(msg, COMMAND_DELIM); // command part of message
-  cout << command << endl;
-  string arg = strtok(NULL, COMMAND_DELIM); // arg part
-  cout << arg << endl;
   vector<string> args;
-  args.push_back(arg);
+  istringstream iss(msg);
+  string command;
+  string arg;
+  iss >> command; // command part
+  iss >> arg;
+  if (arg.size() > 0) {
+    args.push_back(arg);
+  }
+  // parse socket to arguments
+  stringstream ss;
+  ss << socket;
+  args.push_back(ss.str());
+  for (int i = 0; i < args.size(); i++) {
+    cout << args[i] << " ARGUMENTS OF COMMAND" << endl;
+  }
   manager->executeCommand(command, args);
 }
 ReversiHandler::ReversiHandler(CommandsManager *manager) : manager(manager) {}

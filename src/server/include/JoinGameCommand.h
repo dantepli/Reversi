@@ -2,8 +2,11 @@
 #define REVERSI_JOINGAMECOMMAND_H
 
 #include <cstdlib>
+#include <unistd.h>
+#include <iostream>
 #include "Command.h"
 #include "GameLobbies.h"
+using namespace std;
 class JoinGameCommand: public Command {
  public:
   /**
@@ -19,6 +22,8 @@ class JoinGameCommand: public Command {
    * D'tor.
    */
   virtual ~JoinGameCommand();
+ private:
+  bool gameFlow(int currentPlayer, int coPlayer);
 };
 
 #endif //REVERSI_JOINGAMECOMMAND_H
