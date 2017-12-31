@@ -56,8 +56,6 @@ Server::Server(ReversiHandler *handler, int port)
 }
 // starts the server.
 void Server::start() {
-  bool keepPlaying = true;
-  int firstClient, secondClient;
   this->setUpServer();
   // Define the client socket's structures
   pthread_t acceptThread;
@@ -66,78 +64,22 @@ void Server::start() {
   args.serverSocket = serverSocket;
   args.handler = handler;
   int rc = pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
+  string exitInput;
+  cin >> exitInput;
+  if(exitInput == "exit") {
+    pthread_cancel(acceptThread);
+    pthread_join(acceptThread, NULL);
+    stop();
+    exit(0);
+  }
   pthread_join(acceptThread, NULL);
   pthread_exit(NULL);
-//  while (true) {
-//    cout << "Waiting for client connections..." << endl;
-//    // Accept a new client connection
-//    /*
-//     * GameManager || THIS IS THE FLOW OF THE GAME AFTER JOIN
-//     * ######################################################
-//     */
-//    firstClient = acceptClient();
-//    if (firstClient == -1) {
-//      throw "Error accept";
-//    }
-//    cout << "Player 1 connected" << endl;
-//    secondClient = acceptClient();
-//    if (secondClient == -1) {
-//      throw "Error accept";
-//    }
-//    cout << "Player 2 connected" << endl;
-//    this->setUpClients(firstClient, secondClient);
-//    while (keepPlaying) {
-//      keepPlaying = handleClient(firstClient, secondClient);
-//      if (!(keepPlaying)) {
-//        keepPlaying = false;
-//        continue;
-//      }
-//      keepPlaying = handleClient(secondClient, firstClient);
-//      if (!(keepPlaying)) {
-//        keepPlaying = false;
-//      }
-//    }
-//    /*
-//     * ######################################################
-//     */
-//    // Close communication with the client
-//    close(firstClient);
-//    close(secondClient);
-//    keepPlaying = true;
 }
 // stops the server.
 void Server::stop() {
   close(serverSocket);
 }
 
-//bool Server::handleClient(int currentPlayer, int coPlayer) {
-//  int n;
-//  char msg[MAX_LEN];
-//  n = static_cast<int>(read(currentPlayer, &msg, sizeof(msg)));
-//  if (n == -1) {
-//    cout << "Error reading msg" << endl;
-//    return false;
-//  }
-//  if (n == 0) {
-//    cout << "Client disconnected" << endl;
-//    return false;
-//  }
-//  n = static_cast<int>(write(coPlayer, &msg, sizeof(msg)));
-//  if (n == -1) {
-//    cout << "Error writing to socket" << endl;
-//    return false;
-//  }
-//  return strcmp(reinterpret_cast<const char *>(&msg), "End") != 0;
-//}
-// accept each connections of the client.
-int Server::acceptClient() {
-  struct sockaddr_in clientAddress = {};
-  socklen_t clientAddressLen;
-  int client = accept(serverSocket,
-                      (struct sockaddr *) &clientAddress,
-                      &clientAddressLen);
-  return client;
-}
 // setting up the server.
 void Server::setUpServer() {
 // Create a socket point
@@ -158,37 +100,3 @@ void Server::setUpServer() {
   // Start listening to incoming connections
   listen(serverSocket, MAX_CONNECTED_CLIENTS);
 }
-// give each client is number.
-void Server::setUpClients(int firstClient, int secondClient) {
-  int n;
-  char msg[MAX_LEN] = {'1', '2'};
-  n = static_cast<int>(write(firstClient, &msg[0], 1));
-  if (n == -1) {
-    cout << "Error writing to player" << endl;
-  }
-  n = static_cast<int>(write(secondClient, &msg[1], 1));
-  if (n == -1) {
-    cout << "Error writing to player" << endl;
-  }
-}
-
-void Server::writeToSocket(const char *message, int socket) {
-  int n = static_cast<int>(write(socket, &message, strlen(message)));
-  if (n == -1) {
-    cout << "Error writing to socket" << endl;
-    throw "Error writing to socket";
-  }
-}
-char *Server::readFromSocket(int socket) {
-  int n = static_cast<int>(read(socket, &msg, sizeof(msg)));
-  if (n == -1) {
-    cout << "Error reading msg" << endl;
-    return NULL;
-  }
-  if (n == 0) {
-    cout << "Client disconnected" << endl;
-    return NULL;
-  }
-  return msg;
-}
-

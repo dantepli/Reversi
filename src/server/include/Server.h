@@ -7,8 +7,8 @@
 #include <string.h>
 #include <iostream>
 #include <vector>
-#define MAX_CONNECTED_CLIENTS 10
-#define MAX_LEN 50
+#define MAX_CONNECTED_CLIENTS 30
+#define MAX_LEN 255
 using namespace std;
 class Server {
  public:
