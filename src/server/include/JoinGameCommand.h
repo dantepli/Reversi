@@ -6,6 +6,9 @@
 #include <iostream>
 #include "Command.h"
 #include "GameLobbies.h"
+
+#define JOIN_ERROR "-1"
+#define JOIN_SUCCESS "1"
 using namespace std;
 class JoinGameCommand: public Command {
  public:
@@ -22,8 +25,6 @@ class JoinGameCommand: public Command {
    * D'tor.
    */
   virtual ~JoinGameCommand();
- private:
-  bool gameFlow(int currentPlayer, int coPlayer);
 };
 
 #endif //REVERSI_JOINGAMECOMMAND_H

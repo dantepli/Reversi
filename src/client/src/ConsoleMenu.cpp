@@ -1,6 +1,5 @@
 #include "../include/ConsoleMenu.h"
 
-
 int ConsoleMenu::showMainMenu() {
   return getOpponentChoice();
 }
@@ -28,57 +27,59 @@ int ConsoleMenu::getOpponentChoice() {
 }
 
 bool ConsoleMenu::onlineChoices(Client *client) {
-    game = true;
-    string input;
-    string args;
-    int j;
-    char *command, *arg;
-    cin.ignore();
-    client->connectToServer();
-    do {
-      args = "";
-      j = 0;
-      cout << "Please choose one of the options: " << endl;
-      cout << "start 'lobby name' --- (Start a new game lobby)" << endl;
-      cout << "join 'lobby name' --- (Join an existing game lobby)" << endl;
-      cout << "list_games --- (A list of game lobbies)" << endl;
-      getline(cin, input);
-      char *cstr = new char[input.length()];
-      strcpy(cstr, input.c_str());
-      command = strtok(cstr, " ");
-      if(cstr[strlen(command) - 1] == '\0') {
-        arg = strtok(NULL, "\n");
-        args.append(arg);
+  game = true;
+  string input;
+  string args;
+  int j;
+  char *command, *arg;
+  cin.ignore();
+  do {
+    try {
+      client->connectToServer();
+    } catch (const char *error) {
+      cerr << error << endl;
+      return false;
+    }
+    args = "";
+    j = 0;
+    cout << "Please choose one of the options: " << endl;
+    cout << "start 'lobby name' --- (Start a new game lobby)" << endl;
+    cout << "join  'lobby name' --- (Join an existing game lobby)" << endl;
+    cout << "list_games         --- (A list of game lobbies)" << endl;
+    getline(cin, input);
+    char *cstr = new char[input.length()];
+    strcpy(cstr, input.c_str());
+    command = strtok(cstr, " ");
+    if (cstr[strlen(command) - 1] == '\0') {
+      arg = strtok(NULL, "\n");
+      args.append(arg);
+    }
+    if (strcmp(command, "start") == 0) {
+      check = startGame(client, input);
+      if (!(game)) {
+        return false;
       }
-      if (strcmp(command, "start") == 0) {
-        check = startGame(client, input);
-        if(!(game)) {
-          return false;
-        }
-        if(check) {
-          return check;
-        }
-        client->connectToServer();
+      if (check) {
+        return check;
+      }
+      j++;
+    } else if (strcmp(command, "join") == 0) {
+      check = joinGame(client, input);
+      if (!(game)) {
+        return false;
+      }
+      if (!check) {
+        cout << "Wrong lobby name" << endl;
         j++;
-      } else if (strcmp(command, "join") == 0) {
-        check = joinGame(client, input);
-        if(!(game)) {
-          return false;
-        }
-        if(!check) {
-          cout << "Wrong lobby name" << endl;
-          client->connectToServer();
-          j++;
-        } else return check;
-      } else if (strcmp(command, "list_games") == 0) {
-        j++;
-        listGames(client, input);
-        client->connectToServer();
-      }
-      if (j == 0) {
-        cout << "Unknown command please enter a new one." << endl;
-      }
-    }while(j != -1);
+      } else return check;
+    } else if (strcmp(command, "list_games") == 0) {
+      j++;
+      listGames(client, input);
+    }
+    if (j == 0) {
+      cout << "Unknown command please enter a new one." << endl;
+    }
+  } while (j != -1);
 }
 
 bool ConsoleMenu::startGame(Client *client, string args) {
@@ -125,13 +126,13 @@ bool ConsoleMenu::joinGame(Client *client, string args) {
     return game;
   }
   cout << serverResponse << endl;
-  if (strcmp(serverResponse, "-") == 0) {
+  if (strcmp(serverResponse, "-1") == 0) {
     return false;
   }
   return true;
 }
 
-void ConsoleMenu::listGames(Client *client, string args)  {
+void ConsoleMenu::listGames(Client *client, string args) {
   char *serverResponse = NULL;
   try {
     client->sendMsg(args.c_str());

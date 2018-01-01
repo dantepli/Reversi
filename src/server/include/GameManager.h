@@ -7,7 +7,7 @@
 #include "GameLobbies.h"
 #include "GameLobby.h"
 
-#define MAX_LEN 10
+#define MAX_LEN 255
 using namespace std;
 class GameManager {
  public:
@@ -21,6 +21,7 @@ class GameManager {
   void setUpGame();
   void gameFlow();
   bool playTurn(int currPlayer, int coPlayer);
+  void closeGame();
 };
 
 #endif //REVERSI_GAMEMANAGER_H

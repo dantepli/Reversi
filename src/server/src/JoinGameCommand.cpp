@@ -12,22 +12,25 @@ void JoinGameCommand::execute(vector<string> args) {
   string lobbyName = args[0];
   int socket = atoi(args[1].c_str());
   int n;
+  string msg;
   GameLobby *lobby = lobbies->getLobby(lobbyName);
   if (lobby == NULL) {
     // invalid lobby name
-    n = static_cast<int>(write(socket, "-1", 1));
+    msg = JOIN_ERROR;
+    n = static_cast<int>(write(socket, msg.c_str(), msg.size()));
     if (n == -1) {
       throw "Error writing message to client";
     }
     close(socket); // finished handling this command.
     return;
   }
+  msg = JOIN_SUCCESS;
   lobby->setJoinedSocket(socket); // sets the the second player socket.
-  n = static_cast<int>(write(socket, "1", 1));
+  n = static_cast<int>(write(socket, msg.c_str(), msg.size()));
   if (n == -1) {
     throw "Error writing message to client";
   }
-  sleep(0.5);
+  sleep(0.01);
   GameManager manager(lobby);
   manager.play(); // starts the game.
 }

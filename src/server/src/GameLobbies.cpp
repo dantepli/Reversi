@@ -26,8 +26,14 @@ bool GameLobbies::addLobby(string lobbyName, int socket) {
   return true;
 }
 bool GameLobbies::removeLobby(string lobbyName) {
-  size_t removed = lobbies.erase(lobbyName);
-  return removed > 0; // if erase was successful removed value is 1.
+  map<string, GameLobby *>::iterator it = lobbies.find(lobbyName);
+  if (it == lobbies.end()) {
+    // no such lobby
+    return false;
+  }
+  delete it->second; // deletes the game lobby
+  lobbies.erase(it); // removes entry from the map
+  return true;
 }
 GameLobby *GameLobbies::getLobby(string lobbyName) {
   map<string, GameLobby *>::iterator it = lobbies.find(lobbyName);

@@ -1,11 +1,14 @@
 #include "../include/GameManager.h"
 GameManager::GameManager(GameLobby *lobby) : lobby(lobby) {}
 void GameManager::play() {
-  setUpGame();
+  try {
+    setUpGame();
+  } catch (const char *error) {
+    // failed creating game.
+    closeGame();
+  }
   gameFlow();
-  GameLobbies *lobbies = GameLobbies::getInstance();
-  // remove the lobby after the game is done.
-  lobbies->removeLobby(lobby->getLobbyName());
+  closeGame();
 }
 void GameManager::setUpGame() {
   int n;
@@ -14,11 +17,11 @@ void GameManager::setUpGame() {
   char msg[2] = {'1', '2'};
   n = static_cast<int>(write(firstClient, &msg[0], 1));
   if (n == -1) {
-    cout << "Error writing to player" << endl;
+    throw "Error writing to player";
   }
   n = static_cast<int>(write(secondClient, &msg[1], 1));
   if (n == -1) {
-    cout << "Error writing to player" << endl;
+    throw "Error writing to player";
   }
 }
 void GameManager::gameFlow() {
@@ -56,4 +59,11 @@ bool GameManager::playTurn(int currPlayer, int coPlayer) {
     return false;
   }
   return strcmp(reinterpret_cast<const char *>(&msg), "End") != 0;
+}
+void GameManager::closeGame() {
+  GameLobbies *lobbies = GameLobbies::getInstance();
+  // close sockets and remove the lobby after the game is done
+  close(lobby->getInitialSocket());
+  close(lobby->getJoinedSocket());
+  lobbies->removeLobby(lobby->getLobbyName());
 }

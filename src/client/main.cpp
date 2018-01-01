@@ -41,7 +41,8 @@ void startNetworkGame(Menu *menu) {
   NetworkParser parser("../exe/net_config.txt"); // CLION RUN
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
   bool response = menu->onlineChoices(client);
-  if (!(response)) {
+  if (!response) {
+    // an error occurred
     delete display;
     delete board;
     delete logic;
