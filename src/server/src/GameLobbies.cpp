@@ -37,7 +37,8 @@ bool GameLobbies::removeLobby(string lobbyName) {
 }
 GameLobby *GameLobbies::getLobby(string lobbyName) {
   map<string, GameLobby *>::iterator it = lobbies.find(lobbyName);
-  if (it == lobbies.end()) {
+  if (it == lobbies.end() || !it->second->isJoinable()) {
+    // lobby not found OR lobby is not joinable
     return NULL;
   }
   return it->second; // GameLobby*

@@ -20,12 +20,15 @@ void ReversiHandler::handle(int socket) {
   string command;
   string arg;
   iss >> command; // command part
-  iss >> arg;
+  iss >> ws; // ignore whitespaces until arg
+  while (iss) {
+    getline(iss, arg);
+  }
   if (arg.size() > 0) {
     args.push_back(arg);
   }
   // parse socket to arguments
-  stringstream ss;
+  ostringstream ss;
   ss << socket;
   args.push_back(ss.str());
   for (int i = 0; i < args.size(); i++) {
