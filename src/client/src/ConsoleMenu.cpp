@@ -46,8 +46,10 @@ int ConsoleMenu::onlineChoices(Client *client) {
       char *cstr = new char[input.length()];
       strcpy(cstr, input.c_str());
       command = strtok(cstr, " ");
-      arg = strtok(NULL, "\n");
-      args.append(arg);
+      if(cstr[strlen(command) - 1] == '\0') {
+        arg = strtok(NULL, "\n");
+        args.append(arg);
+      }
       int i = 0;
       for (i = 0; i < commands.size(); i++) {
         if (strcmp(command, commands.at(i).c_str()) == 0) {
@@ -56,16 +58,19 @@ int ConsoleMenu::onlineChoices(Client *client) {
             if(color != FAILED) {
               return color;
             }
+            client->connectToServer();
             j++;
           } else if (strcmp(command, "join") == 0) {
             color = joinGame(client, input);
             if(color == FAILED) {
               cout << "Wrong lobby name" << endl;
+              client->connectToServer();
               j++;
             } else return color;
           } else if (strcmp(command, "list_games") == 0) {
             j++;
             listGames(client, input);
+            client->connectToServer();
           }
         }
       }
@@ -77,10 +82,18 @@ int ConsoleMenu::onlineChoices(Client *client) {
 
 int ConsoleMenu::startGame(Client *client,string args) {
   string dummy;
-  char *serverResponse;
+  char *serverResponse = NULL;
   do {
-    client->sendMsg(args.c_str());
-    serverResponse = client->receiveMsg();
+    try {
+      client->sendMsg(args.c_str());
+    } catch (const char *msg) {
+      cerr << msg << endl;
+    }
+    try {
+      serverResponse = client->receiveMsg();
+    } catch (const char *msg) {
+      cerr << msg << endl;
+    }
     cout << "SERVER WROTE " << serverResponse << endl;
     if (strcmp(serverResponse, "-1") == 0) {
       cout << "This game lobby is already registered" << endl;
@@ -91,9 +104,17 @@ int ConsoleMenu::startGame(Client *client,string args) {
 }
 
 int ConsoleMenu::joinGame(Client *client, string args) {
-  char *serverResponse;
-  client->sendMsg(args.c_str());
-  serverResponse = client->receiveMsg();
+  char *serverResponse = NULL;
+  try {
+    client->sendMsg(args.c_str());
+  } catch (const char *msg) {
+    cerr << msg << endl;
+  }
+  try {
+    serverResponse = client->receiveMsg();
+  } catch (const char *msg) {
+    cerr << msg << endl;
+  }
   cout << serverResponse << endl;
   if (strcmp(serverResponse, "-") == 0) {
     return FAILED;
@@ -102,10 +123,18 @@ int ConsoleMenu::joinGame(Client *client, string args) {
 }
 
 void ConsoleMenu::listGames(Client *client, string args)  {
-  char *serverResponse;
-  client->sendMsg(args.c_str());
+  char *serverResponse = NULL;
+  try {
+    client->sendMsg(args.c_str());
+  } catch (const char *msg) {
+    cerr << msg << endl;
+  }
   cout << "Game rooms: " << endl;
-  serverResponse = client->receiveMsg();
+  try {
+    serverResponse = client->receiveMsg();
+  } catch (const char *msg) {
+    cerr << msg << endl;
+  }
   cout << serverResponse << endl;
 }
 void ConsoleMenu::funcInit()  {
