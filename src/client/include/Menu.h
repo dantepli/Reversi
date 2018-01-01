@@ -16,7 +16,7 @@ class Menu {
    * @param client - id of the user.
    * @return - the color of the user in the game.
    */
-  virtual int onlineChoices(Client *client) = 0;
+  virtual bool onlineChoices(Client *client) = 0;
   /**
    * D'tor.
    */
