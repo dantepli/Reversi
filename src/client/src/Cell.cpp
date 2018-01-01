@@ -18,7 +18,7 @@ void Cell::setDisk(char disk) {
   Cell::disk = disk;
 }
 string Cell::toCoordinate() const {
-  ostringstream rowStr, colStr;
+    ostringstream rowStr, colStr;
   rowStr << row + 1;
   colStr << col + 1;
   return '(' + rowStr.str() + ',' + colStr.str() + ')';

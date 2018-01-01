@@ -14,27 +14,29 @@
 using namespace std;
 class ConsoleMenu : public Menu {
  public:
-  virtual int showMainMenu() const;
-  virtual int onlineChoices(Client *client) const;
+  virtual int showMainMenu();
+  virtual int onlineChoices(Client *client);
  private:
-  int getOpponentChoice() const;
+  vector<std::string> commands;
+  int getOpponentChoice();
   /**
    * shows the start game option, and gets the user lobby name.
    * @param client - id of the user.
    * @return - the color of the user.
    */
-  int startGame(Client *client) const;
+  int startGame(Client *client, string args);
   /**
    * shows the join game option, and gets the user lobby name.
    * @param client - id of the user.
    * @return - the color of id
    */
-  int joinGame(Client *client) const;
+  int joinGame(Client *client, string args);
   /**
    * prints all the game lobbies that are joinable.
    * @param client - id of the user.
    */
-  void listGames(Client *client) const;
+  void listGames(Client *client, string args);
+  void funcInit();
 };
 
 #endif //REVERSI_CONSOLEMENU_H

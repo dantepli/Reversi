@@ -45,7 +45,8 @@ void Client::sendMsg(const char *msg) {
 }
 char *Client::receiveMsg() {
   clearMessage();
-  int n = read(clientSocket, &msg, sizeof(msg));
+  int n;
+  n = read(clientSocket, &msg, sizeof(msg));
   if (n == -1) {
     throw "Error reading message from socket";
   }

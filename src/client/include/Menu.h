@@ -10,13 +10,13 @@ class Menu {
    * shows the main menu, and gets the user's choice.
    * @return - the user's choice.
    */
-  virtual int showMainMenu() const = 0;
+  virtual int showMainMenu() = 0;
   /**
    * shows the online choices to the player and gets the user's choice. 
    * @param client - id of the user.
    * @return - the color of the user in the game.
    */
-  virtual int onlineChoices(Client *client) const = 0;
+  virtual int onlineChoices(Client *client) = 0;
   /**
    * D'tor.
    */

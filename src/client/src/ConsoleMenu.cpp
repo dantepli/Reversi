@@ -1,9 +1,10 @@
 #include "../include/ConsoleMenu.h"
 
-int ConsoleMenu::showMainMenu() const {
+
+int ConsoleMenu::showMainMenu() {
   return getOpponentChoice();
 }
-int ConsoleMenu::getOpponentChoice() const {
+int ConsoleMenu::getOpponentChoice() {
   int input;
   cout << "Please choose your opponent: " << endl;
   cout << "1. Press 1 to play against a Local Human Player." << endl;
@@ -26,88 +27,90 @@ int ConsoleMenu::getOpponentChoice() const {
   return input;
 }
 
-int ConsoleMenu::onlineChoices(Client *client) const {
-  int input;
-  do {
+int ConsoleMenu::onlineChoices(Client *client) {
+    funcInit();
+    string input;
+    string args;
+    int j, color;
+    char *command, *arg;
+    cin.ignore();
     client->connectToServer();
-    cout << "Please choose one of the options: " << endl;
-    cout << "1. Start a new game lobby." << endl;
-    cout << "2. Join an existing game lobby." << endl;
-    cout << "3. A list of game lobbies." << endl;
-    cin >> input;
-    switch (input) {
-      case 1: {
-        int color = startGame(client);
-        if (color != FAILED) {
-          cout << "Waiting for other player to join..." << endl;
-          return color;
+    do {
+      args = "";
+      j = 0;
+      cout << "Please choose one of the options: " << endl;
+      cout << "1. Start a new game lobby. (start 'lobby name')" << endl;
+      cout << "2. Join an existing game lobby. (join 'lobby name')" << endl;
+      cout << "3. A list of game lobbies.  (list_games)" << endl;
+      getline(cin, input);
+      char *cstr = new char[input.length()];
+      strcpy(cstr, input.c_str());
+      command = strtok(cstr, " ");
+      arg = strtok(NULL, "\n");
+      args.append(arg);
+      int i = 0;
+      for (i = 0; i < commands.size(); i++) {
+        if (strcmp(command, commands.at(i).c_str()) == 0) {
+          if (strcmp(command, "start") == 0) {
+            color = startGame(client, input);
+            if(color != FAILED) {
+              return color;
+            }
+            j++;
+          } else if (strcmp(command, "join") == 0) {
+            color = joinGame(client, input);
+            if(color == FAILED) {
+              cout << "Wrong lobby name" << endl;
+              j++;
+            } else return color;
+          } else if (strcmp(command, "list_games") == 0) {
+            j++;
+            listGames(client, input);
+          }
         }
-        break;
       }
-      case 2: {
-        int color = joinGame(client);
-        if (color != FAILED) {
-          return color;
-        }
-        break;
+      if (j == 0) {
+        cout << "Unknown command please enter a new one." << endl;
       }
-      case 3: {
-        listGames(client);
-        break;
-      }
-      default:cout << "Invalid choice." << endl;
-        break;
-    }
-  } while (input != FAILED);
+    }while(j != -1);
 }
 
-int ConsoleMenu::startGame(Client *client) const {
-  string sInput;
+int ConsoleMenu::startGame(Client *client,string args) {
   string dummy;
   char *serverResponse;
-  cout << "Please enter a new lobby name" << endl;
-  cin >> sInput;
   do {
-    string startCommand = "start ";
-    startCommand.append(sInput);
-    client->sendMsg(startCommand.c_str());
+    client->sendMsg(args.c_str());
     serverResponse = client->receiveMsg();
     cout << "SERVER WROTE " << serverResponse << endl;
     if (strcmp(serverResponse, "-1") == 0) {
       cout << "This game lobby is already registered" << endl;
-      cout << "Please enter a new lobby name (return to the last menu with 'back')" << endl;
-      cin >> sInput;
-      if (strcmp(sInput.c_str(), "back") == 0) {
-        return FAILED;
-      }
-      client->connectToServer();
+      return FAILED;
     }
   } while (strcmp(serverResponse, "1") != 0);
   return BLACK_COLOR;
 }
 
-int ConsoleMenu::joinGame(Client *client) const {
-  string sInput;
+int ConsoleMenu::joinGame(Client *client, string args) {
   char *serverResponse;
-  cout << "Please enter a lobby name" << endl;
-  cin >> sInput;
-  string joinCommand = "join ";
-  joinCommand.append(sInput);
-  client->sendMsg(joinCommand.c_str());
+  client->sendMsg(args.c_str());
   serverResponse = client->receiveMsg();
   cout << serverResponse << endl;
-  if (strcmp(serverResponse, "-1") == 0) {
-    cout << "Failed to join game lobby" << endl;
+  if (strcmp(serverResponse, "-") == 0) {
     return FAILED;
   }
   return WHITE_COLOR;
 }
 
-void ConsoleMenu::listGames(Client *client) const {
+void ConsoleMenu::listGames(Client *client, string args)  {
   char *serverResponse;
-  string listGames = "list_games";
-  client->sendMsg(listGames.c_str());
+  client->sendMsg(args.c_str());
   cout << "Game rooms: " << endl;
   serverResponse = client->receiveMsg();
   cout << serverResponse << endl;
 }
+void ConsoleMenu::funcInit()  {
+    commands.push_back("start");
+    commands.push_back("join");
+    commands.push_back("list_games");
+}
+
