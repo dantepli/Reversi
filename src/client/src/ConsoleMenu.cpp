@@ -126,10 +126,7 @@ bool ConsoleMenu::joinGame(Client *client, string args) {
     return game;
   }
   cout << serverResponse << endl;
-  if (strcmp(serverResponse, "-1") == 0) {
-    return false;
-  }
-  return true;
+  return strcmp(serverResponse, "-1") != 0;
 }
 
 void ConsoleMenu::listGames(Client *client, string args) {
