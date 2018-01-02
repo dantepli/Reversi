@@ -7,7 +7,7 @@ class Globals {
   static const char kBlacks = 'X';
   static const char kWhites = 'O';
   static const char kEmpty = ' ';
-  static const int kSize = 8;
+  static const int kSize = 4;
 };
 
 #endif //GLOBALS_H

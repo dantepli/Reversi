@@ -36,7 +36,7 @@ class GameLobbies {
   /**
    *
    * @param lobbyName - name of the lobby.
-   * @return - the lobby of the game.
+   * @return - the lobby of the game if the lobby is joinable.
    */
   GameLobby *getLobby(string lobbyName);
   /**
@@ -50,6 +50,7 @@ class GameLobbies {
   map<string, GameLobby*> lobbies;
   GameLobbies() {}
   static GameLobbies *instance;
+  static pthread_mutex_t lock;
 };
 
 #endif //REVERSI_GAMELOBBIES_H

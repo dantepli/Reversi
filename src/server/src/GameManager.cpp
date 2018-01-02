@@ -43,7 +43,7 @@ void GameManager::gameFlow() {
 }
 bool GameManager::playTurn(int currPlayer, int coPlayer) {
   int n;
-  char msg[MAX_LEN];
+  char msg[REVERSI_MAX_LEN];
   n = static_cast<int>(read(currPlayer, &msg, sizeof(msg)));
   if (n == -1) {
     cout << "Error reading msg" << endl;

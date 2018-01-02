@@ -1,14 +1,23 @@
 #include "../include/GameLobbies.h"
 
 GameLobbies *GameLobbies::instance = NULL;
+pthread_mutex_t GameLobbies::lock;
 
 GameLobbies *GameLobbies::getInstance() {
-  if (instance != NULL) {
-    // already initialized.
-    return instance;
+//  if (instance != NULL) {
+//    // already initialized.
+//    return instance;
+//  }
+//  // first time creation
+//  instance = new GameLobbies();
+//  return instance;
+  if (instance == NULL) {
+    pthread_mutex_lock(&lock);
+    if (instance == NULL) {
+      instance = new GameLobbies();
+    }
+    pthread_mutex_unlock(&lock);
   }
-  // first time creation
-  instance = new GameLobbies();
   return instance;
 }
 GameLobbies::~GameLobbies() {

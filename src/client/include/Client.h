@@ -8,7 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-#define MAX_LEN 255
+#define REVERSI_MAX_LEN 255
 class Client {
  public:
   /**
@@ -33,7 +33,7 @@ class Client {
   char *receiveMsg();
  private:
   const char *serverIP;
-  char msg[MAX_LEN];
+  char msg[REVERSI_MAX_LEN];
   int serverPort;
   int clientSocket;
   /**

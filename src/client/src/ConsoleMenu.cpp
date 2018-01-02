@@ -47,14 +47,11 @@ bool ConsoleMenu::onlineChoices(Client *client) {
     cout << "join  'lobby name' --- (Join an existing game lobby)" << endl;
     cout << "list_games         --- (A list of game lobbies)" << endl;
     getline(cin, input);
-    char *cstr = new char[input.length()];
-    strcpy(cstr, input.c_str());
-    command = strtok(cstr, " ");
-    if (cstr[strlen(command) - 1] == '\0') {
-      arg = strtok(NULL, "\n");
-      args.append(arg);
-    }
-    if (strcmp(command, "start") == 0) {
+    istringstream iss(input);
+    string command;
+    string arg;
+    iss >> command; // command part
+    if (command == "start") {
       check = startGame(client, input);
       if (!(game)) {
         return false;
@@ -63,7 +60,7 @@ bool ConsoleMenu::onlineChoices(Client *client) {
         return check;
       }
       j++;
-    } else if (strcmp(command, "join") == 0) {
+    } else if (command == "join") {
       check = joinGame(client, input);
       if (!(game)) {
         return false;
@@ -72,7 +69,7 @@ bool ConsoleMenu::onlineChoices(Client *client) {
         cout << "Wrong lobby name" << endl;
         j++;
       } else return check;
-    } else if (strcmp(command, "list_games") == 0) {
+    } else if (command == "list_games") {
       j++;
       listGames(client, input);
     }

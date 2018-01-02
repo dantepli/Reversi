@@ -5,7 +5,7 @@ ReversiHandler::~ReversiHandler() {
 void ReversiHandler::handle(int socket) {
   // ########### THREAD?
   //char *msg = server->readFromSocket(socket);
-  char msg[MAX_LEN];
+  char msg[REVERSI_MAX_LEN];
   int n;
   n = static_cast<int>(read(socket, &msg, sizeof(msg)));
   cout << "READ::::::::::::" << msg << endl;

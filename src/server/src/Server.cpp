@@ -66,11 +66,11 @@ void Server::start() {
   int rc = pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
   string exitInput;
   cin >> exitInput;
-  if(exitInput == "exit") {
+  if (exitInput == "exit") {
     pthread_cancel(acceptThread);
     pthread_join(acceptThread, NULL);
     stop();
-    exit(0);
+    return;
   }
   pthread_join(acceptThread, NULL);
   pthread_exit(NULL);

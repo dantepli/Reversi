@@ -37,8 +37,8 @@ void startNetworkGame(Menu *menu) {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
-  //NetworkParser parser("net_config.txt"); // CMD RUN
-  NetworkParser parser("../exe/net_config.txt"); // CLION RUN
+  NetworkParser parser("net_config.txt"); // CMD RUN
+  //NetworkParser parser("../exe/net_config.txt"); // CLION RUN
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
   bool response = menu->onlineChoices(client);
   if (!response) {

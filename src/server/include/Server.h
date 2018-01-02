@@ -8,7 +8,6 @@
 #include <iostream>
 #include <vector>
 #define MAX_CONNECTED_CLIENTS 30
-#define MAX_LEN 255
 using namespace std;
 class Server {
  public:
@@ -38,7 +37,7 @@ class Server {
  private:
   int port;
   int serverSocket; // the socket's file descriptor
-  char msg[MAX_LEN];
+  char msg[REVERSI_MAX_LEN];
   vector<pthread_t> threads;
   ReversiHandler *handler;
   /**
