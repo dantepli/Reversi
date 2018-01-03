@@ -3,12 +3,9 @@
 ReversiHandler::~ReversiHandler() {
 }
 void ReversiHandler::handle(int socket) {
-  // ########### THREAD?
-  //char *msg = server->readFromSocket(socket);
   char msg[REVERSI_MAX_LEN];
   int n;
   n = static_cast<int>(read(socket, &msg, sizeof(msg)));
-  cout << "READ::::::::::::" << msg << endl;
   if (n == -1) {
     throw "Error reading msg\n";
   }
@@ -31,9 +28,6 @@ void ReversiHandler::handle(int socket) {
   ostringstream ss;
   ss << socket;
   args.push_back(ss.str());
-  for (int i = 0; i < args.size(); i++) {
-    cout << args[i] << " ARGUMENTS OF COMMAND" << endl;
-  }
   manager->executeCommand(command, args);
 }
 ReversiHandler::ReversiHandler(CommandsManager *manager) : manager(manager) {}

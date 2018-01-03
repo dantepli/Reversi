@@ -8,7 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-#define REVERSI_MAX_LEN 255
+#define REVERSI_MAX_LEN 4096
 class Client {
  public:
   /**

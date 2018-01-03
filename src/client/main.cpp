@@ -50,7 +50,7 @@ void startNetworkGame(Menu *menu) {
     exit(1);
   } else {
     char *initialColor = client->receiveMsg();
-    cout << initialColor << "COLOR " << endl;
+    display->displayWaitingForPlayer();
     if (strcmp(initialColor, "1") == 0) {
       // local player color is black.
       Player *human = new HumanPlayer(display, Globals::kBlacks);

@@ -17,7 +17,6 @@ int main() {
     port = atoi(portStr.c_str());
     myfile.close();
   }
-  cout << "PORT: " << port << endl;
   CommandsManager *manager = new CommandsManager();
   ReversiHandler *handler = new ReversiHandler(manager);
   Server server(handler, port);
@@ -29,6 +28,5 @@ int main() {
   }
   delete manager;
   delete handler;
-  GameLobbies *lobby = GameLobbies::getInstance();
-  delete lobby;
+  GameLobbies::deleteInstance();
 }

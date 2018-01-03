@@ -12,14 +12,11 @@
 class GameLobbies {
  public:
   /**
-   * D'tor. deletes the game lobbies inside.
-   */
-  ~GameLobbies();
-  /**
    *
    * @return - the instance of the singleton.
    */
   static GameLobbies *getInstance();
+  static void deleteInstance();
   /**
    * adds a new lobby, if the lobby already exits, does nothing.
    * @param lobbyName - lobby name.
@@ -49,6 +46,7 @@ class GameLobbies {
  private:
   map<string, GameLobby*> lobbies;
   GameLobbies() {}
+  ~GameLobbies();
   static GameLobbies *instance;
   static pthread_mutex_t lock;
 };

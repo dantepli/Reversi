@@ -75,6 +75,7 @@ bool ConsoleMenu::onlineChoices(Client *client) {
       } else return check;
     } else if (command == "list_games") {
       listGames(client, input);
+      continue;
     }
     cout << "Unknown command please enter a new one." << endl;
   } while (game);
@@ -98,7 +99,6 @@ bool ConsoleMenu::startGame(Client *client, string args) {
       game = false;
       return game;
     }
-    cout << "SERVER WROTE " << serverResponse << endl;
     if (strcmp(serverResponse, "-1") == 0) {
       cout << "This game lobby is already registered" << endl;
       return false;
@@ -123,7 +123,7 @@ bool ConsoleMenu::joinGame(Client *client, string args) {
     game = false;
     return game;
   }
-  cout << serverResponse << endl;
+  client->sendMsg(serverResponse);
   return strcmp(serverResponse, "-1") != 0;
 }
 

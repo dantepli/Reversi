@@ -24,10 +24,9 @@ void *acceptClients(void *acceptArgs) {
   struct sockaddr_in clientAddress = {};
   socklen_t clientAddressLen;
   int clientSocket;
+  cout << "Waiting for client connections..." << endl;
   vector<pthread_t> threads;
-  cout << args->serverSocket << endl;
   while (true) {
-    cout << "Waiting for client connections..." << endl;
     clientSocket = accept(args->serverSocket,
                           (struct sockaddr *) &clientAddress,
                           &clientAddressLen);
@@ -37,14 +36,11 @@ void *acceptClients(void *acceptArgs) {
     struct handleArgs handleArgs;
     handleArgs.clientSocket = clientSocket;
     handleArgs.handler = args->handler;
-    cout << "CLIENT SOCKET " << clientSocket << endl;
     pthread_t handleThread;
-    int rc =
-        pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
+    pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
     threads.push_back(handleThread);
   }
   for (int i = 0; i < threads.size(); i++) {
-    cout << "WAITING ON THREADS" << endl;
     pthread_join(threads[i], NULL);
   }
 }
@@ -63,9 +59,11 @@ void Server::start() {
   cout << serverSocket << "SERVER SOCKET" << endl;
   args.serverSocket = serverSocket;
   args.handler = handler;
-  int rc = pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
+  pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
   string exitInput;
-  cin >> exitInput;
+  do {
+    cin >> exitInput;
+  } while(exitInput == "exit");
   if (exitInput == "exit") {
     pthread_cancel(acceptThread);
     pthread_join(acceptThread, NULL);
