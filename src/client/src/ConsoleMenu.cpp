@@ -30,8 +30,6 @@ bool ConsoleMenu::onlineChoices(Client *client) {
   game = true;
   string input;
   string args;
-  int j;
-  char *command, *arg;
   cin.ignore();
   do {
     try {
@@ -40,43 +38,46 @@ bool ConsoleMenu::onlineChoices(Client *client) {
       cerr << error << endl;
       return false;
     }
-    args = "";
-    j = 0;
     cout << "Please choose one of the options: " << endl;
     cout << "start 'lobby name' --- (Start a new game lobby)" << endl;
     cout << "join  'lobby name' --- (Join an existing game lobby)" << endl;
     cout << "list_games         --- (A list of game lobbies)" << endl;
+    // getting a input from the user and divide it to command
     getline(cin, input);
     istringstream iss(input);
     string command;
     string arg;
     iss >> command; // command part
+    iss >> arg;
     if (command == "start") {
+      if(arg == "") {
+        continue;
+      }
       check = startGame(client, input);
       if (!(game)) {
-        return false;
+        return false; // if we can't write or read from the server we exit from the game.
       }
       if (check) {
         return check;
       }
-      j++;
+      continue;
     } else if (command == "join") {
+      if(arg == "") {
+        continue;
+      }
       check = joinGame(client, input);
       if (!(game)) {
-        return false;
+        return false; // if we can't write or read from the server we exit from the game.
       }
       if (!check) {
         cout << "Wrong lobby name" << endl;
-        j++;
+        continue;
       } else return check;
     } else if (command == "list_games") {
-      j++;
       listGames(client, input);
     }
-    if (j == 0) {
-      cout << "Unknown command please enter a new one." << endl;
-    }
-  } while (j != -1);
+    cout << "Unknown command please enter a new one." << endl;
+  } while (game);
 }
 
 bool ConsoleMenu::startGame(Client *client, string args) {
