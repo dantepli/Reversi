@@ -56,14 +56,13 @@ void Server::start() {
   // Define the client socket's structures
   pthread_t acceptThread;
   struct acceptArgs args;
-  cout << serverSocket << "SERVER SOCKET" << endl;
   args.serverSocket = serverSocket;
   args.handler = handler;
   pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
   string exitInput;
   do {
     cin >> exitInput;
-  } while(exitInput == "exit");
+  } while (exitInput != "exit");
   if (exitInput == "exit") {
     pthread_cancel(acceptThread);
     pthread_join(acceptThread, NULL);

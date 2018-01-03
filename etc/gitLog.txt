@@ -1,3 +1,154 @@
+commit dbcc268907c5fee0cb7b8cf7f78d5fc53724fc8a
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Wed Jan 3 23:15:52 2018 +0200
+
+    Final changes before submission
+
+commit 7ba9f77916374e67070e507540aa20f75f67e89a
+Author: orlion312 <orlion312@gmail.com>
+Date:   Wed Jan 3 15:22:42 2018 +0200
+
+    consoleMenu last update
+
+commit d0be5e0a17d43373a6aef9dcd33b8c4dacc74999
+Merge: 26980af 9d23996
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Jan 2 16:58:52 2018 +0200
+
+    ConsoleMenu Updated
+
+commit 26980afcf4fc46ef6379d175868ba6a1fa6e6c4a
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Jan 2 16:56:31 2018 +0200
+
+    ConsoleMenu and mutexes initial version
+
+commit 9d239963af51b4be7e8566b80ef1e03b9175f5c8
+Author: orlion312 <orlion312@gmail.com>
+Date:   Tue Jan 2 14:00:31 2018 +0200
+
+    minor changes to consoleMenu 2.0
+
+commit ad42f53e06f09915cb4404373d0bb7524606b6c1
+Author: orlion312 <orlion312@gmail.com>
+Date:   Mon Jan 1 19:13:39 2018 +0200
+
+    minor changes to consoleMenu
+
+commit 2be005fb93ca6826c5d8413ed6174e340fb503a3
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Jan 1 19:10:07 2018 +0200
+
+    Fixed join bug
+
+commit 17f767963ff0766c93057b433b8f8d4b32d3a99e
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Jan 1 17:40:24 2018 +0200
+
+    Minor modifcations to consoleMenu, multi-threading in server continued
+
+commit 62f4aeba9a562cd51d6e602c2e50d88cc8818e70
+Author: orlion312 <orlion312@gmail.com>
+Date:   Mon Jan 1 16:40:37 2018 +0200
+
+    updated client 1.0
+
+commit 765c9ec3e02de90171ef5778e1aed33ddee68005
+Author: orlion312 <orlion312@gmail.com>
+Date:   Mon Jan 1 13:02:40 2018 +0200
+
+    updated client 0.9
+
+commit e84d03d54d1e6a6aaf1d3e2e76e715671f1558e3
+Author: orlion312 <orlion312@gmail.com>
+Date:   Mon Jan 1 12:13:03 2018 +0200
+
+    updated client
+
+commit a95ad40fd42eb5bbcbe961e34af9b20aca1663ba
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Sun Dec 31 20:27:32 2017 +0200
+
+    multi threaded server modifications
+
+commit 7c7c1c14a813cb69833536835c46881f5903c875
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Sun Dec 31 00:43:13 2017 +0200
+
+    threading server work, added game manager
+
+commit d90521820c165de06defef533e3244ba13bdab62
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Thu Dec 28 16:54:49 2017 +0200
+
+    threading server first stage
+
+commit e810afce276df3c8041c0539affc4d56005bf333
+Author: orlion312 <orlion312@gmail.com>
+Date:   Thu Dec 28 13:10:57 2017 +0200
+
+    updated client
+
+commit de70b6639014485a1b34921e75c73eef66120a1e
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Dec 26 21:03:52 2017 +0200
+
+    GameLobbies changes
+
+commit 04c20089d0f865f3bb650b24929380ba0bafdb33
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Dec 26 19:06:13 2017 +0200
+
+    Added GameLobby and GameLobbies Singelton
+
+commit f808f2b5516b7c430a58490604bc621abb6db112
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Dec 26 13:38:12 2017 +0200
+
+    Command Manager additions
+
+commit b39337a9a72f15f3689cb8494aeafc2487db7c4c
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Tue Dec 26 12:50:56 2017 +0200
+
+    folder re-org
+
+commit 06713efa5aefd6085a34995ebdaf1c8509b3a123
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Dec 11 18:54:44 2017 +0200
+
+    coding style
+
+commit bac73ebd97d1b5bce0782033d9cfc47622841b6c
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Dec 11 18:51:11 2017 +0200
+
+    fixed upstream additions
+
+commit 97d967ac5accfd4386904b8a399c677737ff0132
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Dec 11 18:45:53 2017 +0200
+
+    minor updates
+
+commit 1c1460dde7b29d1a8aeb41490ec109a6c66fa4d8
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Dec 11 18:35:21 2017 +0200
+
+    minor change
+
+commit f87b7b21ee90290ac198667b12eb6a2aef9559c1
+Author: DanoneHarta <dan932@gmail.com>
+Date:   Mon Dec 11 18:34:35 2017 +0200
+
+    minor updates
+
+commit af98d1b08e5d9af707d9733925adfc5f323561d8
+Author: orlion312 <orlion312@gmail.com>
+Date:   Mon Dec 11 18:25:32 2017 +0200
+
+    Final version
+
 commit d67ec8aca8a6af13771516cad31b2c0b54112abb
 Author: DanoneHarta <dan932@gmail.com>
 Date:   Mon Dec 11 16:56:03 2017 +0200
