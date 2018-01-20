@@ -1,16 +1,14 @@
 #include "include/Server.h"
-#include "include/GameLobbies.h"
-#include <stdlib.h>
 using namespace std;
 #include <fstream>
-
+#define THREAD_NUM 1
 int main() {
   int port;
   string portDelim = "port:";
   string portStr;
   string line;
-  //ifstream myfile("../exe/server_config.txt"); // CLION RUN
-  ifstream myfile("server_config.txt"); // CMD RUN
+  ifstream myfile("../exe/server_config.txt"); // CLION RUN
+  //ifstream myfile("server_config.txt"); // CMD RUN
   if (myfile.is_open()) {
     myfile >> portStr;
     portStr = portStr.substr(portStr.find(portDelim) + portDelim.size());
@@ -19,7 +17,8 @@ int main() {
   }
   CommandsManager *manager = new CommandsManager();
   ReversiHandler *handler = new ReversiHandler(manager);
-  Server server(handler, port);
+  ThreadPool *pool = new ThreadPool(THREAD_NUM);
+  Server server(handler, pool, port);
   try {
     server.start();
   } catch (const char *msg) {
@@ -28,5 +27,6 @@ int main() {
   }
   delete manager;
   delete handler;
+  delete pool;
   GameLobbies::deleteInstance();
 }

@@ -2,6 +2,17 @@
 #include "../include/JoinGameCommand.h"
 #include "../include/GameManager.h"
 
+struct playGameArgs {
+  GameManager *manager;
+};
+
+void *playGame(void *gameManager) {
+  struct playGameArgs *args = (struct playGameArgs *)gameManager;
+  args->manager->play();
+  delete args->manager;
+  delete args;
+}
+
 JoinGameCommand::JoinGameCommand() {}
 void JoinGameCommand::execute(vector<string> args) {
   GameLobbies *lobbies = GameLobbies::getInstance();
@@ -29,9 +40,16 @@ void JoinGameCommand::execute(vector<string> args) {
     throw "Error writing message to client";
   }
   n = static_cast<int>(read(socket, clientResponse, sizeof(clientResponse)));
-  GameManager manager(lobby);
-  manager.play(); // starts the game.
+  GameManager *manager = new GameManager(lobby);
+  struct playGameArgs *playArgs = new struct playGameArgs();
+  playArgs->manager = manager;
+  pthread_t playThread;
+  pthread_create(&playThread, NULL, playGame, (void *) playArgs);
+
+  //manager.play(); // starts the game.
 }
+
+
 
 JoinGameCommand::~JoinGameCommand() {
 

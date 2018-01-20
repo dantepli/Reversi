@@ -134,14 +134,16 @@ void ConsoleMenu::listGames(Client *client, string args) {
   } catch (const char *msg) {
     cerr << msg << endl;
     game = false;
+    return;
   }
-  cout << "Game rooms: " << endl;
   try {
     serverResponse = client->receiveMsg();
   } catch (const char *msg) {
     cerr << msg << endl;
     game = false;
+    return;
   }
+  cout << "Game rooms: " << endl;
   cout << serverResponse << endl;
 }
 

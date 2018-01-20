@@ -8,6 +8,7 @@ struct handleArgs {
 struct acceptArgs {
   int serverSocket;
   ReversiHandler *handler;
+  ThreadPool *pool;
 };
 
 void *handleClient(void *handleArgs) {
@@ -25,7 +26,6 @@ void *acceptClients(void *acceptArgs) {
   socklen_t clientAddressLen;
   int clientSocket;
   cout << "Waiting for client connections..." << endl;
-  vector<pthread_t> threads;
   while (true) {
     clientSocket = accept(args->serverSocket,
                           (struct sockaddr *) &clientAddress,
@@ -36,18 +36,17 @@ void *acceptClients(void *acceptArgs) {
     struct handleArgs handleArgs;
     handleArgs.clientSocket = clientSocket;
     handleArgs.handler = args->handler;
-    pthread_t handleThread;
-    pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
-    threads.push_back(handleThread);
-  }
-  for (int i = 0; i < threads.size(); i++) {
-    pthread_join(threads[i], NULL);
+    Task *task = new Task(handleClient, (void *)&handleArgs);
+    args->pool->addTask(task);
+    //pthread_t handleThread;
+    //pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
+    //threads.push_back(handleThread);
   }
 }
 
 // constructor.
-Server::Server(ReversiHandler *handler, int port)
-    : handler(handler), port(port), serverSocket(0) {
+Server::Server(ReversiHandler *handler,ThreadPool *pool, int port)
+    : handler(handler), port(port), serverSocket(0), pool(pool) {
   cout << "Server" << endl;
 }
 // starts the server.
@@ -58,6 +57,7 @@ void Server::start() {
   struct acceptArgs args;
   args.serverSocket = serverSocket;
   args.handler = handler;
+  args.pool = pool;
   pthread_create(&acceptThread, NULL, acceptClients, (void *) &args);
   string exitInput;
   do {
@@ -74,6 +74,7 @@ void Server::start() {
 }
 // stops the server.
 void Server::stop() {
+  pool->terminate();
   close(serverSocket);
 }
 
