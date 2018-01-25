@@ -3,13 +3,13 @@
 #include "../include/GameManager.h"
 
 struct playGameArgs {
-  GameManager *manager;
+  GameLobby *lobby;
 };
 
-void *playGame(void *gameManager) {
-  struct playGameArgs *args = (struct playGameArgs *)gameManager;
-  args->manager->play();
-  delete args->manager;
+void *playGame(void *lobby) {
+  struct playGameArgs *args = (struct playGameArgs *)lobby;
+  GameManager manager(args->lobby);
+  manager.play();
   delete args;
 }
 
@@ -40,9 +40,9 @@ void JoinGameCommand::execute(vector<string> args) {
     throw "Error writing message to client";
   }
   n = static_cast<int>(read(socket, clientResponse, sizeof(clientResponse)));
-  GameManager *manager = new GameManager(lobby);
+  // play game arguments.
   struct playGameArgs *playArgs = new struct playGameArgs();
-  playArgs->manager = manager;
+  playArgs->lobby = lobby;
   pthread_t playThread;
   pthread_create(&playThread, NULL, playGame, (void *) playArgs);
 

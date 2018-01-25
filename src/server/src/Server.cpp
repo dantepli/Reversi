@@ -36,11 +36,8 @@ void *acceptClients(void *acceptArgs) {
     struct handleArgs handleArgs;
     handleArgs.clientSocket = clientSocket;
     handleArgs.handler = args->handler;
-    Task *task = new Task(handleClient, (void *)&handleArgs);
-    args->pool->addTask(task);
-    //pthread_t handleThread;
-    //pthread_create(&handleThread, NULL, handleClient, (void *) &handleArgs);
-    //threads.push_back(handleThread);
+    Task task(handleClient, (void *)&handleArgs);
+    args->pool->addTask(&task);
   }
 }
 
