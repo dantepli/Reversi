@@ -50,7 +50,7 @@ bool ConsoleMenu::onlineChoices(Client *client) {
     iss >> command; // command part
     iss >> arg;
     if (command == "start") {
-      if(arg == "") {
+      if (arg == "") {
         continue;
       }
       check = startGame(client, input);
@@ -62,7 +62,7 @@ bool ConsoleMenu::onlineChoices(Client *client) {
       }
       continue;
     } else if (command == "join") {
-      if(arg == "") {
+      if (arg == "") {
         continue;
       }
       check = joinGame(client, input);

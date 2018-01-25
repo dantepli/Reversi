@@ -36,7 +36,7 @@ void ThreadPool::executeTasks() {
 void ThreadPool::terminate() {
   pthread_mutex_destroy(&lock);
   stopped = true;
-  
+
 }
 ThreadPool::~ThreadPool() {
   delete[] threads;

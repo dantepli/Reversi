@@ -17,7 +17,8 @@ class ConsoleMenu : public Menu {
   virtual int showMainMenu();
   virtual bool onlineChoices(Client *client);
  private:
-  bool check, game; // helps us check if there was error in connection with the server and keeping the online lobby.
+  bool check,
+      game; // helps us check if there was error in connection with the server and keeping the online lobby.
   int getOpponentChoice();
   /**
    * shows the start game option, and gets the user lobby name.

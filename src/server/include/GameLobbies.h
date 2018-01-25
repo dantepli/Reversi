@@ -44,7 +44,7 @@ class GameLobbies {
    */
   vector<string> getJoinableLobbies();
  private:
-  map<string, GameLobby*> lobbies;
+  map<string, GameLobby *> lobbies;
   GameLobbies() {}
   ~GameLobbies();
   static GameLobbies *instance;

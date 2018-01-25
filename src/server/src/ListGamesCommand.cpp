@@ -1,6 +1,5 @@
 #include "../include/ListGamesCommand.h"
 
-
 ListGamesCommand::ListGamesCommand() {}
 void ListGamesCommand::execute(vector<string> args) {
   int socket = atoi(args[0].c_str());

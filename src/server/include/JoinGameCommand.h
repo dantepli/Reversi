@@ -10,7 +10,7 @@
 #define JOIN_ERROR "-1"
 #define JOIN_SUCCESS "1"
 using namespace std;
-class JoinGameCommand: public Command {
+class JoinGameCommand : public Command {
  public:
   /**
    *

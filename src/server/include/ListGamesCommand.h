@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <cstring>
 #include <iostream>
-class ListGamesCommand: public Command {
+class ListGamesCommand : public Command {
  public:
   /**
    *

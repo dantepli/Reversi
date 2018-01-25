@@ -36,14 +36,14 @@ void *acceptClients(void *acceptArgs) {
     struct handleArgs handleArgs;
     handleArgs.clientSocket = clientSocket;
     handleArgs.handler = args->handler;
-    Task task(handleClient, (void *)&handleArgs);
+    Task task(handleClient, (void *) &handleArgs);
     // add task to thread pool.
     args->pool->addTask(&task);
   }
 }
 
 // constructor.
-Server::Server(ReversiHandler *handler,ThreadPool *pool, int port)
+Server::Server(ReversiHandler *handler, ThreadPool *pool, int port)
     : handler(handler), port(port), serverSocket(0), pool(pool) {
   cout << "Server" << endl;
 }
