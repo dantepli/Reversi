@@ -55,12 +55,12 @@ void Game::play() {
     }
     playTurn(*white);
   }
-  black->endGame();
-  white->endGame();
   if (crashed) {
     cerr << "Other player disconnected. Exiting..." << endl;
     return;
   }
+  black->endGame();
+  white->endGame();
   determineHighScore(*white, *black);
 }
 void Game::determineHighScore(const Player &player1, const Player &player2) {

@@ -6,8 +6,13 @@ struct playGameArgs {
   GameLobby *lobby;
 };
 
+/**
+ * plays the game, function for pthread.
+ * @param lobby - a game lobby.
+ * @return -
+ */
 void *playGame(void *lobby) {
-  struct playGameArgs *args = (struct playGameArgs *)lobby;
+  struct playGameArgs *args = (struct playGameArgs *) lobby;
   GameManager manager(args->lobby);
   manager.play();
   delete args;
@@ -40,16 +45,15 @@ void JoinGameCommand::execute(vector<string> args) {
     throw "Error writing message to client";
   }
   n = static_cast<int>(read(socket, clientResponse, sizeof(clientResponse)));
+  if (n == -1) {
+    throw "Error writing message to client";
+  }
   // play game arguments.
   struct playGameArgs *playArgs = new struct playGameArgs();
   playArgs->lobby = lobby;
   pthread_t playThread;
   pthread_create(&playThread, NULL, playGame, (void *) playArgs);
-
-  //manager.play(); // starts the game.
 }
-
-
 
 JoinGameCommand::~JoinGameCommand() {
 

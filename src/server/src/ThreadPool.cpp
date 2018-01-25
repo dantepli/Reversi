@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ThreadPool.h"
+#include "../include/ThreadPool.h"
 ThreadPool::ThreadPool(int threadsNum) :
     stopped(false) {
   threads = new pthread_t[threadsNum];
@@ -14,7 +14,9 @@ void *ThreadPool::execute(void *arg) {
   pool->executeTasks();
 }
 void ThreadPool::addTask(Task *task) {
+  pthread_mutex_lock(&lock);
   tasksQueue.push(task);
+  pthread_mutex_unlock(&lock);
 }
 
 void ThreadPool::executeTasks() {

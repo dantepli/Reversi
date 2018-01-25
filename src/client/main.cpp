@@ -33,12 +33,16 @@ int main() {
   return 0;
 }
 
+/**
+ * starts a network game.
+ * @param menu - a menu.
+ */
 void startNetworkGame(Menu *menu) {
   Display *display = new ConsoleDisplay();
   Board *board = new Board(Globals::kSize);
   Logic *logic = new StdLogic();
-  //NetworkParser parser("net_config.txt"); // CMD RUN
-  NetworkParser parser("../exe/net_config.txt"); // CLION RUN
+  NetworkParser parser("net_config.txt"); // CMD RUN
+  //NetworkParser parser("../exe/net_config.txt"); // CLION RUN
   Client *client = new Client(parser.getIP().c_str(), parser.getPort());
   bool response = menu->onlineChoices(client);
   if (!response) {
@@ -49,8 +53,8 @@ void startNetworkGame(Menu *menu) {
     delete client;
     exit(1);
   } else {
-    char *initialColor = client->receiveMsg();
     display->displayWaitingForPlayer();
+    char *initialColor = client->receiveMsg();
     if (strcmp(initialColor, "1") == 0) {
       // local player color is black.
       Player *human = new HumanPlayer(display, Globals::kBlacks);

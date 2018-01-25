@@ -37,6 +37,7 @@ void *acceptClients(void *acceptArgs) {
     handleArgs.clientSocket = clientSocket;
     handleArgs.handler = args->handler;
     Task task(handleClient, (void *)&handleArgs);
+    // add task to thread pool.
     args->pool->addTask(&task);
   }
 }
